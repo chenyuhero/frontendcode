@@ -4,7 +4,8 @@
 	<title>瀑布流</title>
 </head>
 <style type="text/css">
-.content{
+
+	.content{
 		position: relative;
 
 
@@ -34,10 +35,18 @@
 			background-color: #006ac1;
 		}
 
+.clearfix:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.loadmore{
+	position: absolute;
+}
 
 </style>
 <body>
-	<div class="content">
+	<ul class="content clearfix">
 		<div class="item h1">1</div>
 		<div class="item h2">2</div>
 		<div class="item h3">3</div>
@@ -48,13 +57,18 @@
 		<div class="item h3">8</div>
 		<div class="item h1">1</div>
 		<div class="item h1">1</div>
-		<div class="item h1">1</div>
+		<div class="item h1 ">1</div>
 
-		
-	</div>
+		<div class="loadmore clearfix"> <a href="">loadmore</a></div>
+	</ul>
+	
 
 </body>
-<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous">
+ </script> 
 <script type="text/javascript">
 
 
@@ -64,10 +78,6 @@
 $(window).on('resize',function(){
 
 	waterfull()
-
-
-
-
 
 })
 

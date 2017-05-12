@@ -111,7 +111,7 @@
 
 </head>
 <body>
-    <div class="carousel  "> 
+    <div class="carousel"> 
 
     <ul class="img-ct clearfix ">
       
@@ -147,7 +147,134 @@
  <script type="text/javascript">
   
  // $(function(){
-    autoPlay()
+function cursol($ct){
+    this.ct=$ct;
+    this.init();
+    this.bind();
+    this.autoPlay();
+
+
+
+}
+
+cursol.prototype.init  = function(){
+     var $imgCt =this.$imgCt=this.ct.find(".img-ct"),
+         $preBtn=this.$preBtn=this.ct.find(".btn-pre"),
+         $nexBtn=this.$nexBtn=this.ct.find('.btn-next'),
+         $bullet=this.$bullet=this.ct.find('.bullet');
+
+    var $firstImg=$imgCt.find('li').first(),
+        $lastImg=$imgCt.find('li').last();
+    this.curPageIndex=0;
+    this.imgLength=$imgCt.children().length;  
+    this.isAnimate= false;
+
+    $imgCt.prepend($lastImg.clone())
+    $imgCt.append($firstImg.clone())   
+    $imgCt.width($imgCt.children().length*$firstImg.width()) 
+    $imgCt.css('left','-300px')
+
+}
+
+cursol.prototype.bind = function(){
+      var _this= this;
+     this.$nexBtn.on('click',function(e){
+      e.preventDefault()
+      _this.playNext();
+
+    })
+    this.$preBtn.on('click',function(e){
+      e.preventDefault()
+      _this.playPre();
+
+    })
+
+
+  
+}
+cursol.prototype.autoPlay  = function(){
+  var _this=this;
+    clock = setInterval(function(){
+        _this.playNext();
+        }, 4000); 
+
+  
+}
+
+cursol.prototype.playNext = function(){
+  var _this=this;
+  if(this.isAnimate) return;
+       this.isAnimate= true;
+       this.$imgCt.animate({
+       left:'-=300px'
+
+      },function(){
+          
+          _this.curPageIndex++;
+           
+          if(_this.curPageIndex===_this.imgLength){
+             _this.$imgCt.css('left','-300px')
+             _this.curPageIndex=0
+            
+          }
+
+           _this.isAnimate=false;
+           _this.setBullet()
+      })
+
+
+}
+
+cursol.prototype.playPre = function(){
+      var _this=this;
+      if(this.isAnimate) return;
+      this.isAnimate= true;
+      this.$imgCt.animate({
+       left:'+=300px'
+
+      },function(){
+        
+        _this.curPageIndex--;
+         console.log(_this.curPageIndex)
+          if(_this.curPageIndex < 0){
+             _this.$imgCt.css('left',-(_this.imgLength*_this.$imgCt.find('li').first().width()));
+             _this.curPageIndex=_this.imgLength-1
+            
+          }
+
+           _this.isAnimate=false;
+           _this.setBullet()
+      })
+
+  
+}
+
+cursol.prototype.setBullet = function(){
+        var _this=this;
+       this.$bullet.children().removeClass('active').eq(_this.curPageIndex).addClass('active');
+  
+}
+
+   // new cursol($('.carousel'));
+lunbo =(function(){
+      return {
+          init: function($ct){
+              $ct.each(function(index,node){
+
+               new cursol($(node));
+
+            })
+
+          }
+      }
+
+})()
+
+ lunbo.init($('.carousel'));
+
+
+/*
+autoPlay()
 
 
     var $imgCt=$(".img-ct"),
@@ -238,8 +365,7 @@ function autoPlay(){
           playNext();
         }, 4000); 
       }
-
-
+*/
 
 
 

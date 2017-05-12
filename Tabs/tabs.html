@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>商品展示</title>
+</head>
+<style type="text/css">
+  body, ul, li, p{
+  margin: 0;
+  padding: 0;
+}
+ul li{
+  
+  list-style:none;
+}
+a {
+  color: #666;
+  text-decoration: none;
+}
+.clearfix:after{
+  content:'';
+  display: block;
+  clear: both;
+}
+
+.mod-tab{
+  width:800px;
+  
+  
+}
+.tabs{
+ 
+  width:960px;
+  
+}
+.tabs li{
+  float:left;
+ 
+  padding:10px 10px;
+  margin:10px 0;
+  
+}
+ 
+.show-out{
+   width:900px;
+   border: 1px solid #CDC5BF;
+}
+.show-out li {
+  position: relative;
+  float: left;
+  width: 220px;
+  padding: 10px 20px;
+  margin-left: 20px;
+  margin-top: 20px;
+  text-align: center;
+  border: 1px solid #eee;
+  background: #fff;
+  
+}
+.active{
+   border:1px solid #CDC5BF;
+   color: #c81623;
+   background-color:#eee;
+}
+
+.panel{
+  
+    display:none;
+}
+.show{
+  display:block;
+  
+}
+
+.mod-tab .cover{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0, 0.3);
+  transition: all 0.3s;
+  opacity: 0;
+}
+
+.cover:hover{
+  opacity: 1;
+}
+
+.mod-tab .cover .btn{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border: 1px solid #c81623;
+  color: #c81623;
+  padding: 10px 15px;
+  border-radius: 3px;
+  text-align: center;
+  background: #fff;
+  cursor: pointer;
+    
+}
+
+
+
+</style>
+<body>
+<div class="mod-tab">
+  <ul class="tabs clearfix">
+    <li class="active">金条</li>
+    <li>戒指</li>
+    <li>猴哥</li>
+   
+  </ul>
+ <ul class="panel-ct">
+    
+   <li class="panel show ">
+        <ul class="show-out clearfix ">
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img14.360buyimg.com/n7/jfs/t1993/68/2154001221/110943/bdf7b27b/56ab06d2N38a92f6d.jpg">
+          <div>商品名称</div>
+          <div>价格:998</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img14.360buyimg.com/n7/jfs/t1993/68/2154001221/110943/bdf7b27b/56ab06d2N38a92f6d.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img14.360buyimg.com/n7/jfs/t1993/68/2154001221/110943/bdf7b27b/56ab06d2N38a92f6d.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img14.360buyimg.com/n7/jfs/t1993/68/2154001221/110943/bdf7b27b/56ab06d2N38a92f6d.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img14.360buyimg.com/n7/jfs/t1993/68/2154001221/110943/bdf7b27b/56ab06d2N38a92f6d.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img14.360buyimg.com/n7/jfs/t1993/68/2154001221/110943/bdf7b27b/56ab06d2N38a92f6d.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+
+        </ul>
+    </li>
+
+    <li class="panel  ">
+        <ul class="show-out clearfix ">
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img10.360buyimg.com/n7/jfs/t3454/252/667711846/131085/d0cd9c1/58107378Ncdab620a.jpg">
+          <div>商品名称</div>
+          <div>价格:1998</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img10.360buyimg.com/n7/jfs/t3454/252/667711846/131085/d0cd9c1/58107378Ncdab620a.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img10.360buyimg.com/n7/jfs/t3454/252/667711846/131085/d0cd9c1/58107378Ncdab620a.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img10.360buyimg.com/n7/jfs/t3454/252/667711846/131085/d0cd9c1/58107378Ncdab620a.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img10.360buyimg.com/n7/jfs/t3454/252/667711846/131085/d0cd9c1/58107378Ncdab620a.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img10.360buyimg.com/n7/jfs/t3454/252/667711846/131085/d0cd9c1/58107378Ncdab620a.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+
+        </ul>
+    </li>
+
+    <li class="panel  ">
+        <ul class="show-out clearfix ">
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img14.360buyimg.com/n7/jfs/t3064/314/3295339026/506672/c9ead2f4/57ee1045Nb88ae124.jpg">
+          <div>商品名称</div>
+          <div>价格:199</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img14.360buyimg.com/n7/jfs/t3064/314/3295339026/506672/c9ead2f4/57ee1045Nb88ae124.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img14.360buyimg.com/n7/jfs/t3064/314/3295339026/506672/c9ead2f4/57ee1045Nb88ae124.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img14.360buyimg.com/n7/jfs/t3064/314/3295339026/506672/c9ead2f4/57ee1045Nb88ae124.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img14.360buyimg.com/n7/jfs/t3064/314/3295339026/506672/c9ead2f4/57ee1045Nb88ae124.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+          <li class="product">
+            <div class="cover"><a class="btn" href="">立即抢购</a></div>
+            <a>
+            <img src="https://img14.360buyimg.com/n7/jfs/t3064/314/3295339026/506672/c9ead2f4/57ee1045Nb88ae124.jpg">
+          <div>商品名称</div>
+          <div>价格</div>    
+            </a>
+           </li>
+
+        </ul>
+    </li>
+  
+   
+   
+  </ul>
+  
+</div>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script> 
+<script type="text/javascript">
+
+ function Tab(ct){
+      this.ct=ct;
+      this.init();
+      this.bind();
+
+     
+    }
+
+    Tab.prototype.init = function(){
+
+        this.tabList =   this.ct.querySelectorAll('.tabs>li');
+        this.tabPanels = this.ct.querySelectorAll('.panel-ct>li');
+
+    }
+    Tab.prototype.bind = function(){
+          var _this = this;
+          this.tabList.forEach(function(tabli){
+             tabli.onclick = function(e){
+
+              var target = e.target;
+              var index = [].indexOf.call(_this.tabList,target)
+                _this.tabList.forEach(function(li){
+                    li.classList.remove('active')
+                 })//遍历，去掉每个li的calss
+                
+                 target.classList.add('active')
+            
+                _this.tabPanels.forEach(function(li){
+                    li.classList.remove('show')
+                 })//遍历，去掉每个li的calss
+                
+              _this.tabPanels[index].classList.add('show')
+      }  
+
+    })
+
+ }
+
+var tab1 = new Tab(document.querySelectorAll('.mod-tab ')[0]);
+
+
+/*
+
+  $('.mod-tab .tabs li').on('click', function(e){
+   var $cur = $(this);
+   var idx = $cur.index();
+   $cur.siblings().removeClass('active');
+   $cur.addClass('active');
+
+   $cur.parents('.mod-tab').find('.panel').removeClass('show');
+   $cur.parents('.mod-tab').find('.panel').eq(idx).addClass('show');
+});  
+
+*/
+</script>     
+</body>
+</html>
