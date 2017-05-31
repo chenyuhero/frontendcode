@@ -1,0 +1,502 @@
+
+h1, h2,  h4, h5, h6 {
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+html,body,ul,li,a,p,h1,h2,h3,h4,h5,h6{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+  }
+
+ul,li{
+    list-style: none;
+    padding:0;
+}
+html,body{
+    height:100%;
+    font:16px/1.5 "Helvetica","Microsoft Yahei","Arial";
+    text-align: center;
+}
+.clearfix:after {
+  content:'';
+  display:block;
+  clear:both;
+}
+<!--轮播样式-->
+
+ .carousel{
+    position: relative;
+    width: 1920px;
+    overflow: hidden;
+    height: 1080px;
+     
+  }
+   .img-ct{
+    position: relative;
+    width: 11520px;
+    height: 1080px;
+   padding: 0;
+   
+  }
+
+  .img-ct >li{
+    position: absolute;
+    float: left;
+
+  }
+ .img-ct  img{
+      float: left;
+      height: 1080px;
+      width: 1920px;
+  }
+.c-btn{
+    position: absolute;
+    top: 50%;
+    margin-top: -15px; 
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    background: #333;
+    color: red;
+    display: inline-block;
+}
+.btn-pre{
+  left: 80px;
+}
+.btn-next{
+   right: 80px;
+}
+.bullet-ct{
+  position: relative;
+}
+ ul.bullet {
+    padding: 0;
+    margin: 0 auto;
+    width: 300px;
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    top: -60px;
+    margin-left: -150px;
+}
+  .bullet >li{
+    display: inline-block;
+    height: 6px;
+    width: 20px;
+    border-radius: 3px;
+    background-color: #666;
+    }
+.bullet .active{
+    background-color: red;
+  }
+
+
+<!--默认样式-->
+::selection {
+    text-shadow: none;
+    background: #fed136;
+}
+
+.layout{
+ max-width:1150px;
+ margin: 0 auto;
+}
+.middle:before{
+  content: ' ';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.middle li a:hover{
+  color:#fed136;
+}
+.section{
+  padding:150px 0;
+}
+
+.text-muted {
+    color: #777;
+}
+
+.logo{
+  text-decoration: none;
+  float:left;
+  color: #fed136;
+  font-size:25px;
+  position:relative;
+  top:16px;
+  }
+.menu{
+  float:right;
+  
+ }
+
+.menu>li{
+  
+ display: inline-block;
+   
+}
+.btn::hover{
+  background: #fed136;
+}
+.btn{
+  border:none;
+  position:relative;
+  top:13.5px;
+  
+  margin:3px;
+  padding:6px 5px;
+  display: inline-block;
+  color:#fff;
+  border-radius:2px;
+  font-size:16px;
+  text-transform:uppercase;
+  
+}
+
+#nav{
+  background:rgb(34,34,34);
+  height:70px;
+}
+
+
+
+.intro-lead-in{
+  font-size:40px;
+  padding-top:250px;
+}
+.intro-heading{
+  font-size:80px;
+}
+
+.l-btn{
+ margin-top:50px; 
+ display:inline-block;
+ height:65px;
+ width:220px;
+ background:rgb(254,209,54);
+ border-radius:2px;
+ color: #FFFFFF;
+ font-size:18px; 
+   
+}
+
+
+.fa-circle{
+  color:#fed136;
+}
+.section-heading{
+   font-size:40px;
+ }
+.section-hbody {
+    padding-top:30px;
+    padding-bottom:30px;
+    font-size:18px;
+    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-transform: none;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 75px;
+}
+.section p ,h4 {
+  padding-top:10px;
+  
+}
+p{
+  font-size: 14px;
+  line-height: 1.75;
+}
+.bg-light-gray {
+    background-color: #f7f7f7;
+}
+img::selection {
+    background: 0 0;
+}
+#portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content {
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    font-size: 20px;
+    text-align: center;
+    top: 50%;
+    margin-top: -12px;
+    color: #fff;
+}
+#portfolio * {
+    z-index: 2;
+}
+#portfolio .portfolio-item .portfolio-link {
+    display: block;
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+}
+#portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content i {
+    margin-top: -12px;
+}
+.portfolio-hover-content{
+  position:absolute;
+  left:0px;
+  top:0px;
+  z-index:-1;
+}
+.portfolio-hover:hover{
+ color:red;
+}
+.portfolio-item{
+  background: #FFE;
+  border:1px red solid;
+   
+}
+.portfolio-caption{
+    margin-top:20px;
+   margin-bottom:30px;
+   
+}
+.portfolio-caption>h4{
+  margin-bottom:-10px;
+}
+.text-center h3{
+  margin-bottom:0;
+}
+.time-line li img,btn-set{
+  height:180px;
+  width:180px;
+  border-radius:50%;
+  border:7px #f1f1f1  solid ;
+}
+.time-line{
+  padding-top:-0xp;
+}
+.time-line li{
+  position:relative;
+  padding:67.5px 0 ;
+}
+
+
+.time-line-li::after{
+  content:"";
+  display:block;
+  position:absolute;
+  left:50%;
+  border:2px #f1f1f1 solid;
+  height:100%
+   
+}
+
+.btn-set h4{
+  display:inline-block;
+  background:#fed136;
+  height:180px;
+  width:180px;
+  border-radius:50%;
+  border:7px #f1f1f1  solid ;
+  padding-top:45px;
+  line-height:1.5em;
+  
+}
+.last-li{
+  padding-bottom:0px;
+  z-index:1;
+}
+.discrption{
+  text-align:right;
+  position:absolute;
+  top:25%;
+  width:30em;
+  margin-left:-30px;
+  
+  
+}
+.discrption1{
+  text-align:left;
+  position:absolute;
+  top:25%;
+  width:30em;
+  margin-left:650px;
+  
+  
+}
+
+.team-member {
+    text-align: center;
+    margin-bottom: 50px;
+    
+}
+.team-member img {
+    margin: 0 auto;
+    border: 7px solid #fff;
+}
+.team-member {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.team-member h4 {
+    margin-top: 25px;
+    margin-bottom: 0;
+    text-transform: none;
+}
+ul.social-buttons li a {
+    display: block;
+    background-color: #222;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    font-size: 20px;
+    line-height: 40px;
+    color: #fff;
+    outline: 0;
+    
+}
+p.large {
+    font-size: 20px;
+}
+aside.clients img {
+    margin: 50px auto;
+}
+
+section#contact {
+    background-color: #222;
+    background-image: url(http://book.jirengu.com/jirengu-inc/jrg-tehui/homework/%E8%8B%A5%E6%84%9A/16/img/map-image.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+section#contact .form-group {
+    margin-bottom: 25px;
+}
+section#contact .form-group input, section#contact .form-group textarea {
+    padding: 20px;
+}
+section#contact .form-group input.form-control {
+    height: auto;
+}
+.section-heading2{
+   font-size:40px;
+  color:#fff;
+ }
+footer {
+    padding: 25px 0;
+    text-align: center;
+}
+a{
+color: #fed136;
+}
+section#contact .form-group textarea.form-control {
+    height: 262px;
+}
+.social-buttons a:hover{
+  background:#fed136;
+}
+.portfolio-item{
+ display:inline-block;
+ 
+}
+
+#portfolio .portfolio-item .portfolio-link .portfolio-hover {
+    background: rgba(254,209,54,.9);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all ease .5s;
+    -webkit-transition: all ease .5s;
+    -moz-transition: all ease .5s;
+}
+
+agency.css:1
+#portfolio * {
+    z-index: 2;
+}
+<!--新闻-->
+.wrap{
+    width: 1165px;
+    margin: 0 auto;
+  }
+
+
+.clearfix:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+#pic-ct{
+  position: relative;
+}
+.wrap #pic-ct .item{
+  position: absolute; 
+  width:285px;
+  float: left;
+  margin:10px 5px;
+  border:1px solid red;
+  transition: all 1s;
+  opacity: 0;
+}
+
+.wrap .item .header{
+  margin:0 auto;
+  border-bottom:1px solid red;
+  font-size:20px;
+  padding:5px 10px;
+}
+.wrap .item img{
+  width:100%;
+  
+  
+  
+}
+.wrap .item .desp{
+  color: #777371;
+  font-size:14px;
+  padding: 0 5px;
+ 
+}
+.loadmore:hover{
+  background-color: #696969;
+}
+.loadmore{
+  background-color: #eee;
+    color: red;
+   display: block; /* 设置为块元素 */
+    width: 100px;
+    height: 50px;
+    line-height: 50px; /* 设置垂直居中 */
+    text-align: center;
+    border: 1px solid #ccc;
+    margin:0 auto;
+    border-radius: 5px;
+
+}
+.hide{
+  display: none;
+}
+
+.news{
+  width: 1200px;
+  margin:0 auto;
+}
+.gotopbtn{
+
+            color: red;
+
+            background-color: rgb(254,204,44);
+            bottom:100px;
+            right:100px;
+            position:fixed;
+            display: none;
+            padding:10px;
+            cursor:pointer;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            
+    
+
+
+}
