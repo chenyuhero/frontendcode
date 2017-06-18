@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://js.jirengu.com
+
+Copyright (c) 2017 by chenyuhero (http://js.jirengu.com/xuqa/19/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+
+  <meta name="referrer" content="never">
+  <meta charset="utf-8">
+  <title>My FM</title>
+  
+<style id="jsbin-css">
+
+/*初始化*/
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+/*字体图标*/
+@font-face {
+  font-family: 'iconfont';  /* project id 240982 */
+  src: url('//at.alicdn.com/t/font_6bpyej8suac3di.eot');
+  src: url('//at.alicdn.com/t/font_6bpyej8suac3di.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_6bpyej8suac3di.woff') format('woff'),
+  url('//at.alicdn.com/t/font_6bpyej8suac3di.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_6bpyej8suac3di.svg#iconfont') format('svg');
+}
+.icon{
+  font-family: 'iconfont' !important;
+  font-style:normal;
+}
+
+
+.fm{
+  margin:100px auto;
+}
+.fm{
+  box-shadow: 10px 10px 5px #888888;
+  width:680px;
+  height:400px;
+  border-radius:8px;
+}
+/*header*/
+#bar{
+  border-top-left-radius:8px;
+  border-top-right-radius:8px;
+  text-align:center;
+  background:rgb(1,164,160);
+  height:74px;
+}
+.pots{
+  height:74px;
+  
+}
+.pot{
+     position: relative;
+     margin-top: 33px;
+     margin-left: -550px;
+}
+.pot , .pot:after, .pot:before{
+  display:inline-block;
+  height:15px;
+  width:15px;
+  background-color: rgba(255,255,255,0.4);
+  box-shadow: 0 0 1px 1px rgba(0,0,0,0.2) inset, 0 -2px   2px   2px rgb(11, 152, 156) inset, 0 1px 1px 1px     rgba(255,255,255,0.2), 0 -1px 1px 0px rgba(0,0,0,0.2);
+  border-radius:50%;
+  
+}
+.pot:before{
+  position:absolute;
+  content:'';
+  left:20px;
+}
+.pot:after{
+  position:absolute;
+  content:'';
+  left:-20px;
+}
+.vol{
+ position:absolute;
+ margin-top:33px;
+ margin-left:535px;
+  color:#fff;
+ cursor: pointer;
+}
+
+.volu:before{
+  content:"\e622";
+}
+.mute:before{
+  content:"\e621";
+}
+.vol:hover{
+  opacity:0.8;
+}
+.vol-bar{
+    position: relative;
+    top: -24px;
+    left: 633px;
+    cursor: pointer;
+  
+}
+.vol-bar span{
+   display: block;
+   height: 4px;
+    width: 11px;
+   border-radius:1px;
+   margin: 2px 0;
+   background-color: #91bdb4;
+  
+}
+.vol-bar span.active,
+.vol-bar span.active ~ span {
+  background-color: #ced9d3
+}
+
+
+
+
+
+/*频道*/
+#chanel{
+  height:70px;
+   background:rgb(54,57,54);
+}
+.left{
+   margin-top:20px;
+  margin-left:20px;
+   float:left;
+  font-size:30px;
+   color: #e8edea;
+   cursor: pointer;
+  
+}
+.right{
+  font-size:30px;
+  margin-top:20px;
+  margin-right:20px;
+  float:right;
+  color: #e8edea;
+   cursor: pointer;
+}
+.right:hover{
+  opacity:0.8;
+}
+.left:hover{
+  opacity:0.8;
+}
+.channels{
+  text-align:center;
+  
+}
+.channels >li{
+   
+    margin: 26px 36px;
+    color: #7d807e;
+    display: inline-block;
+    cursor: pointer;
+  
+}
+.channels .active{
+  color: #e8edea;
+  font-size: 18px;
+  
+}
+/*音乐*/
+.cover{
+  
+  float:left;
+  
+  height:170px;
+  margin:0 45px;
+   box-shadow: 10px 10px 5px #888888;
+}
+
+.info{
+     
+    margin-left: 248px;
+    width: 400px;
+    height: 254px;
+    
+}
+.detail{
+  position:relative;
+  margin: 40px 40px;
+    
+}
+
+.singer{
+  text-align:left;
+  font-size: 18px;
+  color: #7f8281;
+  font-weight: bold; 
+  
+}
+.title{
+  line-height:30px;
+  text-align:left;  
+  font-size: 18px;
+  color: #000;
+  font-weight: bold; 
+}
+.time{
+  position: absolute;
+  right: 0;
+  top: 20px;
+  font-weight: bold;
+  color: #91bdb4;
+    
+}
+.progress-bar{
+  
+   position: relative;
+  margin-top: 30px;
+  height: 3px;
+  background-color: #ced9d3;
+  cursor: pointer;
+  
+  
+}
+.progress{
+  position: absolute;
+  width: 0%;
+  height: 3px;
+  background-color: #91bdb4;
+  left: 0px;
+   
+}
+.buttons{
+    height: 50px;
+    width: 320px;
+    font-size: 38px;
+    margin: 0 40px;
+   
+   
+}
+.buttons span:hover{
+  opacity:0.4;
+}
+.heart{
+    color:#CDC1C5;
+    position: relative;
+    float:left;
+    top: 6px;
+    cursor: pointer;
+}
+.heart.active{
+  color:red;
+
+}
+.playbtn{
+    left: 97px;
+    font-size: 42px;
+    color: #3f413f;
+    position: relative;
+    cursor: pointer;
+  }
+.pause:before{
+  content:"\e640";
+}
+.play:before{
+  content:"\e646";
+}
+
+
+.next{
+    font-size: 40px;
+    color: #3f413f;
+    position: relative;
+    float:right;
+    top: -1px;
+    cursor: pointer;
+    
+}
+ 
+.irc li.active {
+  display: block;
+}
+.irc li {
+  text-align:center;
+  font-weight: bold;
+  color: #91bdb4;
+  font-size: 18px;
+  display:none;
+}
+
+
+   
+</style>
+</head>
+<body>
+    <div class="fm">
+      <div id="bar">
+        <div class='pots'>
+          <span class="pot"></span>
+          <span  class="icon vol volu"></span>
+          
+          <div class="vol-bar">
+                <span></span>
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+            
+          </div>
+        </div>
+      </div>
+      <div id="chanel">
+        <span class="icon left">&#xe68b;</span>
+        <span class="icon right">&#xe65b;</span>
+        <ul class="channels"></ul>
+       
+       </div>
+      <div id="music">
+        
+          <div><img class="cover" src="https://img1.doubanio.com/lpic/s4202999.jpg">  </img>
+    </div>
+                      
+              <div class="info">
+
+
+                <div class="detail">
+                  <h3 class="singer">Chen Yu</h3>
+                  <p class="title">My FM Player</p>
+                  <span class="time">-04:30</span>
+                  <div class="progress-bar">
+                    <span class="progress"></span>
+                  </div>
+
+                </div> 
+                <div class="buttons">
+                  <span class="icon heart ">&#xe60c;</span>
+                  <span class="icon playbtn pause"></span>
+                  <span class="icon next">&#xe600;</span>
+                </div>
+        </div>
+        <div >
+             
+          <ul class="irc">
+            
+          </ul>
+        </div>
+   </div>
+  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script id="jsbin-javascript">
+
+//声明
+var test = $(".test");
+var playNext = $('.next');
+var playBtn = $('.playbtn');
+var volume = $('.vol');
+var like = $('.heart');
+var volBar = $('.vol-bar span');
+var titleNode = $(".title");
+var authorNode = $(".singer");
+var time = $(".time");
+var progress = $(".progress");
+var progressbar = $(".progress-bar");
+var cha = $(".channels");
+var left = $(".left");
+var right = $(".right");
+var irc = $(".irc");
+var cover = $(".cover");
+
+//通过api获取资源，并放进去
+var music = new Audio();
+var index=0;
+var length = 4;
+var list;
+var channelId="public_tuijian_winter";
+var ircl;
+//载入频道
+$(window).on("load", function(){
+    get('http://api.jirengu.com/fm/getChannels.php', {}, function(ret){
+      list = ret.channels;
+      renderCate(list);
+      fresh(channelId);
+    });
+  
+  });
+//点击，换取频道
+ cha.on("click",function(e){
+     
+   if(e.target.tagName.toLowerCase() !== 'li') return;
+   var $cur = $(e.target);
+   $cur.siblings().removeClass('active');
+   $cur.addClass('active');
+   channelId = e.target.getAttribute('data-channel-id');
+   fresh(channelId);
+  });
+  
+function fresh(channelId){
+  get('http://api.jirengu.com/fm/getSong.php',{channel: channelId}, function(ret){
+      renderSong(ret.song[0]);
+      play(ret.song[0].url);
+      getLrc(ret.song[0].lrc);
+     
+    });
+  
+}
+
+//填空
+  function renderSong(song) {
+    authorNode.text(song.artist);
+    titleNode.text(song.title);
+    cover.attr("src",song.picture);
+    
+  }
+//播放音乐
+  function play(url) {
+    music.src = url;
+    music.play();
+  }
+//获取歌词
+ function getLrc(lrcUrl) {
+    get(lrcUrl,{},function(ret){
+  //  irc.html(ret);
+      parse(ret);
+     // showirc();
+    },'text');
+  }
+//歌词解析方法
+function parse(irc){
+  var line = irc.split('\n');//歌词为以排数为界的数组
+  var result=[];
+  if(line!==''){
+    for(var i in line){
+      var time = line[i].match(/\[\d{2}:\d{2}\.\d{2}\]/g);
+      if(!time)continue;
+      var value = line[i].replace(/\[\d{2}:\d{2}\.\d{2}\]/g,"");
+      for(var j in time){
+       var t = time[j].slice(1, -1).split(':');
+       var timeArr = parseInt(t[0], 10) * 60 + parseFloat(t[1]); 
+       result.push([timeArr, value]);
+      
+      }
+      
+    }
+     result.sort(function (a, b) {
+       return a[0] - b[0];
+     });
+    
+  }
+   
+ rederirc(result); 
+  ircl=result.length;
+ 
+}
+function rederirc(result){
+  var html='';
+  
+  for(j = 0; j < result.length; j++) {
+   
+    html+='<li time="' + result[j][0] + '">' + result[j][1] + '</li>';
+    
+} 
+
+$('.irc').html(html);
+
+}
+  
+function showirc(){
+  
+  for(var i=0;i<ircl;i++){//遍历歌词下所有的li
+            var curT = $(".irc li").eq(i).attr("time");
+            var nexT = $(".irc li").eq(i+1).attr("time");
+            var curTime = music.currentTime;
+               if ((curTime > curT) && (curT < nexT)){
+                $(".irc li").removeClass("active");
+                $(".irc li").eq(i).addClass("active");
+            }
+        }
+       
+  
+} 
+
+
+function renderCate(channels) {
+    var html ="";
+    for(var i = index;i<index+length;i++){
+      
+      if(i==index+2){
+        html+= '<li class="active" data-channel-id="' + channels[i].channel_id + '">' + channels[i].name + '</li>';
+        channelId=channels[i].channel_id;
+      }else{
+      html+= '<li data-channel-id="' + channels[i].channel_id + '">' + channels[i].name + '</li>';
+     }     
+    }
+      
+    cha.html(html);
+    
+  }
+
+
+//左右键
+right.on("click",function(){
+  if(index==36){
+    index=0;
+    renderCate(list);
+  }else{
+    index+=length;
+    renderCate(list);
+  }
+  fresh(channelId);
+});
+left.on("click",function(){
+  if(index===0){
+    index=36;
+    renderCate(list);
+  }else{
+    index-=length;
+    renderCate(list);
+  }
+  fresh(channelId);
+});
+
+//ajax
+  function get(url, data, callback, dataType) {
+    url += '?' + Object.keys(data).map(function(key){
+      return key + '=' + data[key];
+    }).join('&');
+
+    var xhr = new XMLHttpRequest();
+    xhr.responseType =  dataType||'json';
+    xhr.onload = function(){
+      callback(xhr.response);
+    };
+    xhr.open('GET', url, true);
+    xhr.send();
+  }
+
+//事件监听
+music.addEventListener('ended', function(){
+  fresh(channelId);
+});
+music.addEventListener('playing', function(){
+  timer = setInterval(function(){
+    updateProgress();
+    showirc()
+  }, 1000);
+  
+});
+music.addEventListener('pause', function(){
+  clearInterval(timer);
+});
+
+progressbar.on("click",function(e){
+  
+  var percent = e.offsetX/parseInt(getComputedStyle(this).width);
+  console.log(percent);
+  music.currentTime = percent * music.duration;
+  progress.css("width",percent);
+  
+});
+
+//下一曲
+playNext.on("click",function(){
+   fresh(channelId);
+   if(playBtn.hasClass("play")){
+      playBtn.removeClass("play");
+      playBtn.addClass("pause");
+      }
+  
+});
+
+//播放按钮
+ playBtn.on("click",check);
+
+function check(){
+  
+  if(playBtn.hasClass("pause")){
+      music.pause();
+      playBtn.removeClass("pause");
+      playBtn.addClass("play");
+      }else{
+      music.play();
+     
+     playBtn.removeClass("play");
+     playBtn.addClass("pause");
+    }
+  
+}
+
+//静音按钮  
+volume.on('click',function(){
+    if($(this).hasClass("volu")){
+    music.volume = 0;
+    $('.vol').removeClass('volu');
+    $('.vol').addClass('mute');
+      }else{
+     music.volume = 0.5;
+     $('.vol').removeClass('mute');
+     $('.vol').addClass('volu');
+  }
+       
+});
+
+//喜欢按钮
+like.on('click',function(){
+    if($(this).hasClass("active")){
+    like.removeClass('active');
+      
+  }else{
+     like.addClass('active');
+    
+  }
+    
+});
+//音量调节
+volBar.on('click', function(e){
+   var $cur = $(this);
+   var idx = $cur.index();
+   $cur.siblings().removeClass('active');
+   $cur.addClass('active');
+   music.volume = (4-idx)/4;
+   console.log(music.volume);
+   
+  
+});  
+//进度条和时间
+music.shouldUpdate = true;
+function updateProgress(){
+  var percent = (music.currentTime/music.duration)*100+'%';
+  progress.css("width",percent); 
+  var minutes = parseInt(music.currentTime/60);
+  var seconds = parseInt(music.currentTime%60)+'';
+  seconds = seconds.length == 2? seconds : '0'+seconds;
+  time.text(minutes + ':' + seconds);
+}
+
+
+</script>
+</body>
+ 
+</html>
