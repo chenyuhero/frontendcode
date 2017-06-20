@@ -1,28 +1,50 @@
 <!DOCTYPE html>
+<!--
+Created using JS Bin
+http://js.jirengu.com
+
+Copyright (c) 2017 by chenyuhero (http://js.jirengu.com/mixob/2/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
 <html>
 <head>
+<script src="//code.jquery.com/jquery.min.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+ 
+
+  
   <meta charset="utf-8">
   <title>RESUME</title>
-  <script src="//code.jquery.com/jquery.min.js"></script>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-  <style type="text/css">
-    
-    .layout{
+  
+  <style>  
+  
+  </style>
+<style id="css">
+ul li{
+  
+  list-style:none;
+}
+.info{
+  padding-left:30px;
+}
+.information{
+  padding:20px 0;
+}
+
+.layout{
   margin: 0 auto;
   margin-top:30px;
   width：960px;
 }
-.lay{
-  margin: 0 auto;
-  margin-top:30px;
-  width：960px;
-}
+
 .row img{
   width:100px;
   height:100px;
   border-radius: 50%;
+  display:none;
 }
 .titles p{
   font-size:42px;
@@ -90,38 +112,45 @@ h1, h2, h3, h4, h5, ul, ol, li{
 .list i{
   padding-right:30px;
 }
-  </style>
+</style>
 </head>
 
 <div class="container ">  
   <div class="row">
-    <div class="col-md-2 ">
-        <img id="photo" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1489390125&di=785118f7969b290e2679edd9dc5c8160&imgtype=jpg&er=1&src=http%3A%2F%2Feasyread.ph.126.net%2FQNOM9Zyx2MPVGvxrsEAr0w%3D%3D%2F7916986196802870539.jpg"></div>
-    <div class="col-md-5">
+    
+    <div class="col-md-6 info ">
       <div class="titles ">
-          <p>Chen Yu</p>
-          <h4>WEB DESIGNER</h4>
+          <p>陈宇</p>
+          <h4>应聘前端工程师</h4>
     </div> 
+      <div class="information">
+        
+        <ul>
+          <li>性别：男</li>
+          <li>年龄：24</li>
+          <li>学历：本科</li>
+        </ul>
+      </div>
     </div>
-    <div class="col-md-5 contracts ">
+    <div class="col-md-5  contracts ">
       
-      <p class="con"><strong>CONTRACTS</strong><p>
+      <p class="con"><strong>联系方式</strong><p>
       <p id="line"></p>
-      <p class="adress"><i class="fa fa-anchor fa-fw"></i> NanJing City, JiangSu Province, P. R. China</p>
-      <p class="tele"><i class="fa fa-phone fa-fw"></i> +86-15251833069</p>
-      <p class="mail"><i class="fa  fa-envelope  fa-fw"></i>  chenyuehro@hotmail.com</p>
+      <p class="adress"><i class="fa fa-anchor fa-fw"></i> 南京</p>
+      <p class="tele"><i class="fa fa-phone fa-fw"></i>15251833069</p>
+      <p class="mail"><i class="fa  fa-envelope  fa-fw"></i>  <a>chenyuehro@hotmail.com<a></p>
       <p class="git"><i class="fa fa-github fa-fw"></i> https://github.com/chenyuhero</p>
     </div>
 </div><!--header--> 
  
 <!--works start-->  
 <div class="layout">
-   <p class="con2"><strong>WORK EXPERENCE</strong><p>
+   <p class="con2"><strong>项目经验</strong><p>
   <p id="line2"></p></br>
   <div class="exp ">
   <ul class="list line3">
     <li>归隐/<span>2017</span>
-      <p ">在拯救了中原免受蒙古大军的侵扰后和小龙女决定隐居</p>
+      <p >在拯救了中原免受蒙古大军的侵扰后和小龙女决定隐居</p>
     </li>
     <li>求败，厌倦江湖纷争/<span>2016</span>
       <p >无敌是多么的寂寞</p> 
@@ -147,7 +176,7 @@ h1, h2, h3, h4, h5, ul, ol, li{
 
 <!--education start--> 
 <div class="lay">
-  <p class="con2"><strong>EDUCATION</strong><p>
+  
   <p id="line2"></p></br>
 
   <div class="exp ">
@@ -171,9 +200,22 @@ h1, h2, h3, h4, h5, ul, ol, li{
 <!--others-->   
 <div class="container layout ">  
   <div class="row">  
+    <div class="col-md-6">
+    <div>
+      <p class="con2"><strong>专业技能</strong><p>
+      <p id="line2"></p>
+       <ul class="list">
+        <li><i class="fa fa-sun-o fa-fw"></i>HTML&CSS </li>
+        <li><i class="fa fa-sun-o fa-fw"></i>jQuery </li>
+        <li><i class="fa fa-sun-o fa-fw"></i>JavaScript </li>
+        <li><i class="fa fa-sun-o fa-fw"></i>PhotoShop</li>
+      </ul>
+    </div>
+  </div> 
+    
   <div class="col-md-6">
     <div>
-      <p class="con2"><strong>EXTRA ABILITIES</strong><p>
+      <p class="con2"><strong>其他技能</strong><p>
       <p id="line2"></p>
       
       <ul class="list">
@@ -185,19 +227,11 @@ h1, h2, h3, h4, h5, ul, ol, li{
     </div>
   </div> 
     
-  <div class="col-md-6">
-    <div>
-      <p class="con2"><strong>PROFESSIONAL SKILL</strong><p>
-      <p id="line2"></p>
-       <ul class="list">
-        <li><i class="fa fa-sun-o fa-fw"></i>HTML&CSS </li>
-        <li><i class="fa fa-sun-o fa-fw"></i>jQuery </li>
-        <li><i class="fa fa-sun-o fa-fw"></i>JavaScript </li>
-        <li><i class="fa fa-sun-o fa-fw"></i>PhotoShop</li>
-      </ul>
-    </div>
-  </div> </div>
-<body>
+  
+  </div>
 
-</body>
+
+  </body>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+
 </html>
