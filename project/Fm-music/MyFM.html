@@ -382,7 +382,7 @@ var channelId="public_tuijian_winter";
 var ircl;
 //载入频道
 $(window).on("load", function(){
-    get('http://api.jirengu.com/fm/getChannels.php', {}, function(ret){
+    get('//api.jirengu.com/fm/getChannels.php', {}, function(ret){
       list = ret.channels;
       renderCate(list);
       fresh(channelId);
@@ -401,7 +401,7 @@ $(window).on("load", function(){
   });
   
 function fresh(channelId){
-  get('http://api.jirengu.com/fm/getSong.php',{channel: channelId}, function(ret){
+  get('//api.jirengu.com/fm/getSong.php',{channel: channelId}, function(ret){
       renderSong(ret.song[0]);
       play(ret.song[0].url);
       getLrc(ret.song[0].lrc);
