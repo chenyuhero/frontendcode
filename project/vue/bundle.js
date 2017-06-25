@@ -291,21 +291,37 @@ var app = new _vue2.default({
     currentUser: null
   },
   created: function created() {
-    var _this = this;
-
     // onbeforeunload文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onbeforeunload
-    window.onbeforeunload = function () {
-      var dataString = JSON.stringify(_this.todoList); // JSON 文档: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON
-      window.localStorage.setItem('myTodos', dataString); // 看文档https://developer.mozilla.org/zh-CN/docs/Web/API/Window/localStorage
-    };
-
-    var oldDataString = window.localStorage.getItem('myTodos');
-    var oldData = JSON.parse(oldDataString);
-    this.todoList = oldData || [];
 
     this.currentUser = this.getCurrentUser();
+    if (this.currentUser) {
+      var query = new _leancloudStorage2.default.Query('AllTodos');
+      query.find().then(function (todos) {
+        console.log(todos);
+      }, function (error) {
+        console.error(error);
+      });
+    }
   },
   methods: {
+    saveTodos: function saveTodos() {
+
+      var dataString = JSON.stringify(this.todoList); // JSON 文档: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON
+      var AVTodos = _leancloudStorage2.default.Object.extend('AllTodos');
+      var avTodos = new AVTodos();
+      var acl = new _leancloudStorage2.default.ACL();
+      acl.setReadAccess(_leancloudStorage2.default.User.current(), true);
+      acl.setWriteAccess(_leancloudStorage2.default.User.current(), true);
+
+      avTodos.set('content', dataString);
+      avTodos.setACL(acl);
+      avTodos.save().then(function (todo) {
+
+        console.log("保存成功");
+      }, function (error) {
+        console.error('保存失败');
+      });
+    },
     addTodo: function addTodo() {
       this.todoList.push({
         title: this.newTodo,
@@ -313,44 +329,49 @@ var app = new _vue2.default({
         done: false // 添加一个 done 属性
       });
       this.newTodo = '';
+      this.saveTodos();
     },
     removeTodo: function removeTodo(todo) {
       var index = this.todoList.indexOf(todo); // Array.prototype.indexOf 是 ES 5 新加的 API
       this.todoList.splice(index, 1); // 不懂 splice？赶紧看 MDN 文档！
+      this.saveTodos();
     },
     signUp: function signUp() {
-      var _this2 = this;
+      var _this = this;
 
       var user = new _leancloudStorage2.default.User();
       user.setUsername(this.formData.username);
       user.setPassword(this.formData.password);
       user.signUp().then(function (loginedUser) {
-        _this2.currentUser = _this2.getCurrentUser();
+        _this.currentUser = _this.getCurrentUser();
       }, function (error) {
         alert('注册失败');
       });
     },
     login: function login() {
-      var _this3 = this;
+      var _this2 = this;
 
       _leancloudStorage2.default.User.logIn(this.formData.username, this.formData.password).then(function (loginedUser) {
-        _this3.currentUser = _this3.getCurrentUser();
+        _this2.currentUser = _this2.getCurrentUser();
       }, function (error) {
         alert('登录失败');
       });
     },
     getCurrentUser: function getCurrentUser() {
-      // 👈
-      var _AV$User$current = _leancloudStorage2.default.User.current(),
-          id = _AV$User$current.id,
-          createdAt = _AV$User$current.createdAt,
-          username = _AV$User$current.attributes.username;
-      // 上面这句话看不懂就得看 MDN 文档了
-      // 我的《ES 6 新特性列表》里面有链接：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+      var current = _leancloudStorage2.default.User.current();
+      if (current) {
+        var id = current.id,
+            createdAt = current.createdAt,
+            username = current.attributes.username;
+        // 上面这句话看不懂就得看 MDN 文档了
+        // 我的《ES 6 新特性列表》里面有链接：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 
+        return { id: id, username: username, createdAt: createdAt // 看文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Object_initializer#ECMAScript_6%E6%96%B0%E6%A0%87%E8%AE%B0
+        };
+      } else {
 
-      return { id: id, username: username, createdAt: createdAt // 看文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Object_initializer#ECMAScript_6%E6%96%B0%E6%A0%87%E8%AE%B0
-      };
+        return null;
+      }
     },
     logout: function logout() {
       _leancloudStorage2.default.User.logOut();
