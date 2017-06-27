@@ -270,6 +270,7 @@ var _leancloudStorage2 = _interopRequireDefault(_leancloudStorage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//获取key，初始化
 var APP_ID = 's7uCPP4wVpe2lLv0lH1IQhV0-gzGzoHsz';
 var APP_KEY = 'iIwwkdMxfJHe8qdmUuNlaFWE';
 _leancloudStorage2.default.init({
@@ -277,7 +278,7 @@ _leancloudStorage2.default.init({
   appKey: APP_KEY
 
 });
-
+//绑定vue对象
 var app = new _vue2.default({
   el: '#app',
   data: {
@@ -290,23 +291,47 @@ var app = new _vue2.default({
     todoList: [],
     currentUser: null
   },
+  //创建后
   created: function created() {
-    // onbeforeunload文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onbeforeunload
 
     this.currentUser = this.getCurrentUser();
-    if (this.currentUser) {
-      var query = new _leancloudStorage2.default.Query('AllTodos');
-      query.find().then(function (todos) {
-        console.log(todos);
-      }, function (error) {
-        console.error(error);
-      });
-    }
+    this.fetchTodos();
   },
   methods: {
-    saveTodos: function saveTodos() {
+    //读取该用户的todo
+    fetchTodos: function fetchTodos() {
+      var _this = this;
 
-      var dataString = JSON.stringify(this.todoList); // JSON 文档: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON
+      if (this.currentUser) {
+        var query = new _leancloudStorage2.default.Query('AllTodos');
+        query.find().then(function (todos) {
+          var avAllTodos = todos[0]; // 因为理论上 AllTodos 只有一个，所以我们取结果的第一项
+          var id = avAllTodos.id; //获取该用户的id
+          _this.todoList = JSON.parse(avAllTodos.attributes.content); // 为什么有个 attributes？因为我从控制台看到的
+          _this.todoList.id = id; // 为什么给 todoList 这个数组设置 id？因为数组也是对象啊
+          console.log(id);
+          console.log(avAllTodos);
+        }, function (error) {
+          console.error(error);
+        });
+      }
+    },
+
+    updateTodos: function updateTodos() {
+
+      // 想要知道如何更新对象，先看文档 https://leancloud.cn/docs/leanstorage_guide-js.html#更新对象
+      var dataString = JSON.stringify(this.todoList); // JSON 在序列化这个有 id 的数组的时候，会得出怎样的结果？
+      var avTodos = _leancloudStorage2.default.Object.createWithoutData('AllTodos', this.todoList.id);
+      avTodos.set('content', dataString);
+      avTodos.save().then(function () {
+        alert('更改成功');
+      });
+    },
+
+    saveTodos: function saveTodos() {
+      var _this2 = this;
+
+      var dataString = JSON.stringify(this.todoList);
       var AVTodos = _leancloudStorage2.default.Object.extend('AllTodos');
       var avTodos = new AVTodos();
       var acl = new _leancloudStorage2.default.ACL();
@@ -316,12 +341,21 @@ var app = new _vue2.default({
       avTodos.set('content', dataString);
       avTodos.setACL(acl);
       avTodos.save().then(function (todo) {
-
-        console.log("保存成功");
+        _this2.todoList.id = todo.id;
+        alert("保存成功");
       }, function (error) {
-        console.error('保存失败');
+        alert('保存失败');
       });
     },
+
+    saveOrUpdateTodos: function saveOrUpdateTodos() {
+      if (this.todoList.id) {
+        this.updateTodos();
+      } else {
+        this.saveTodos();
+      }
+    },
+
     addTodo: function addTodo() {
       this.todoList.push({
         title: this.newTodo,
@@ -329,30 +363,31 @@ var app = new _vue2.default({
         done: false // 添加一个 done 属性
       });
       this.newTodo = '';
-      this.saveTodos();
+      this.saveOrUpdateTodos();
     },
     removeTodo: function removeTodo(todo) {
       var index = this.todoList.indexOf(todo); // Array.prototype.indexOf 是 ES 5 新加的 API
       this.todoList.splice(index, 1); // 不懂 splice？赶紧看 MDN 文档！
-      this.saveTodos();
+      this.saveOrUpdateTodos();
     },
     signUp: function signUp() {
-      var _this = this;
+      var _this3 = this;
 
       var user = new _leancloudStorage2.default.User();
       user.setUsername(this.formData.username);
       user.setPassword(this.formData.password);
       user.signUp().then(function (loginedUser) {
-        _this.currentUser = _this.getCurrentUser();
+        _this3.currentUser = _this3.getCurrentUser();
       }, function (error) {
         alert('注册失败');
       });
     },
     login: function login() {
-      var _this2 = this;
+      var _this4 = this;
 
       _leancloudStorage2.default.User.logIn(this.formData.username, this.formData.password).then(function (loginedUser) {
-        _this2.currentUser = _this2.getCurrentUser();
+        _this4.currentUser = _this4.getCurrentUser();
+        _this4.fetchTodos();
       }, function (error) {
         alert('登录失败');
       });
