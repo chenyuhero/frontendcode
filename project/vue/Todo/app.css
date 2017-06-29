@@ -1,0 +1,22 @@
+ol li{
+	list-style:none;
+}
+
+
+.layout{
+	width:960px;
+	margin-left:auto;
+	margin-right:auto;
+}
+#app .signUp{
+	border:1px solid green;
+}
+#todo .todos{
+	padding: 0 0 ;
+}
+#todo .todos button{
+	background-color:#98FB98;
+	border-style:none;
+	color:#ffffff;
+	cursor:pointer;
+}
