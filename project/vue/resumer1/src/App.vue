@@ -1,23 +1,69 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
-  </div>
+<div class="page">
+  <header>
+    <Topbar/>
+  </header>
+
+  <main> 
+    <ResumerEditor/>
+    <ResumerPreview/>
+  </main>
+  
+</div>
+
+
 </template>
 
 <script>
+import './assets/reset.css'
+import 'normalize.css/normalize.css'
+import Topbar from './components/Topbar'
+import ResumerEditor from './components/ResumerEditor'
+import ResumerPreview from './components/ResumerPreview'
+
 export default {
-  name: 'app'
+  name: 'app',
+  data: function () {
+    return {
+      text: '你好'
+    }
+  
+},
+  components:{Topbar,ResumerEditor,ResumerPreview}
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+     .page{
+     height: 100vh;
+     display: flex;
+     flex-direction: column;
+     background: #EAEBEC;
+   }
+   .page>main{
+     flex-grow: 1;  
+   }
+ 
+   .page>main{
+     min-width: 1024px;
+     max-width: 1440px;
+     margin-top:16px;
+     margin-bottom:16px;
+     display: flex;
+     justify-content: space-between;
+     padding:0 16px;
+     align-self:center;
+     width:100%;
+   }
+ 
+   #resumeEditor{
+     width: 35%;
+     background: #444;
+   }
+   #resumePreview{
+     flex-grow:1;
+     margin-left:16px;
+     background: #777;
+   }
+
 </style>
