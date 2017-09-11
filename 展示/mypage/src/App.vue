@@ -3,8 +3,8 @@
       
     <Navibar class="navibar"/>
     <main>
-      <Carousel/>
-
+     <Home class="home"/>
+     <Works class="work"/>
     </main>
     
   </div>
@@ -12,14 +12,16 @@
 
 <script>
 import Navibar from './components/Navibar'
-import Carousel from './components/Carousel'
+import Home from './components/Home'
+import Works from './components/Works'
 
 export default {
   name: 'app',
   components: {
   
     Navibar,
-    Carousel
+    Home,
+    Works
   }
 }
 </script>
@@ -34,7 +36,16 @@ export default {
   
 }
 .navibar{
-  background:rgb(26,117,252);
+  background:rgb(60,174,162);
   height:70px;
+}
+.home{
+  background:rgb(60,174,162);
+  height:580px;
+}
+.work{
+  width:1280px;
+  display:inline-block;
+  margin:50px auto;
 }
 </style>
