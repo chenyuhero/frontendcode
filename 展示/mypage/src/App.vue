@@ -46,6 +46,7 @@ export default {
 .work{
   width:1280px;
   display:inline-block;
-  margin:50px auto;
+  margin-top:120px;
+  margin-bottom:150px;
 }
 </style>
