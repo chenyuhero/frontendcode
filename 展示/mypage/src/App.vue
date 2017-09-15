@@ -4,7 +4,10 @@
     <Navibar class="navibar"/>
     <main>
      <Home class="home"/>
-     <Works class="work"/>
+     <About class="about"/>
+     <Work class="work"/>
+     <Contact class="contact"/>
+     <Footer class="footer"/>
     </main>
     
   </div>
@@ -13,7 +16,10 @@
 <script>
 import Navibar from './components/Navibar'
 import Home from './components/Home'
-import Works from './components/Works'
+import Work from './components/Work'
+import About from './components/About'
+import Contact from './components/Contact'
+import Footer from './components/Footer'
 
 export default {
   name: 'app',
@@ -21,7 +27,10 @@ export default {
   
     Navibar,
     Home,
-    Works
+    Work,
+    About,
+    Contact,
+    Footer
   }
 }
 </script>
@@ -43,10 +52,20 @@ export default {
   background:rgb(60,174,162);
   height:580px;
 }
-.work{
+.about{
   width:1280px;
-  display:inline-block;
-  margin-top:120px;
-  margin-bottom:150px;
+  margin:100px auto;
+ }
+.work{
+  width:100%;
+  background:rgb(247,247,247);
+  }
+  .contact{
+     
+     background:rgb(60,174,162);
+  }
+.footer{
+  padding:30px 0;
+  background:rgb(247,247,247);
 }
 </style>
