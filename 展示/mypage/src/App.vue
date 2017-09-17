@@ -36,6 +36,13 @@ export default {
 </script>
 
 <style>
+.icon {
+      
+     width: 3.5em; height: 3.5em;
+     vertical-align: -0.15em;
+     fill: currentColor;
+     overflow: hidden;
+  }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -66,6 +73,6 @@ export default {
   }
 .footer{
   padding:30px 0;
-  background:rgb(247,247,247);
+  background:rgb(256,256,247);
 }
 </style>

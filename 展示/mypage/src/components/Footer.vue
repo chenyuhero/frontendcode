@@ -1,6 +1,7 @@
 <template>
 	
 	<div>
+		
 		<div class="download">
 			
 			<button>下载我的简历</button>
@@ -8,7 +9,23 @@
 		</div>
 		<div class="anno">
 			<div class="power">Copyright © My Website 2017</div>
-			<div class="logo">3</div>
+			<div class="logo">
+				<a>
+				<svg class="icon" >
+			    <use xlink:href="#icon-weibo-copy"></use>
+				</svg>
+				</a>
+				<a>
+				<svg class="icon" >
+			    <use xlink:href="#icon-Git"></use>
+				</svg>
+				</a>
+				<a>
+				<svg class="icon" >
+			    <use xlink:href="#icon-tiitter"></use>
+				</svg>
+				</a>
+			</div>
 			<div class="cha">
 			<a >Privacy Policy</a>
 			<a >Terms of Use</a>
@@ -24,6 +41,7 @@
 		width:1280px;
 		display:flex;
 	 	justify-content:space-between;
+	 	align-items:center;
 		
 	}
 
@@ -32,7 +50,14 @@
 		
 	}
 	.logo{
-		
+		position:relative;
+		left:-10px;
+	}
+	.logo >a{
+		padding: 0 18px;
+	}
+	.logo >a:hover {
+		color:rgb(60,174,162);
 	}
 	.cha{
 		cursor:pointer;
