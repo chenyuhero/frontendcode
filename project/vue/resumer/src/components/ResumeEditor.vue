@@ -1,45 +1,69 @@
 <template>
 	<div id="resumeEditor">
 		<nav>
-			<ol class="active">
+			<ol >
 
-				<li v-for="(item,index) in resume.config"
-					:class="{active:item.field===selected}"
-					@click="selected = item.field"
-				> 
 
-				<svg class="icon">
-					<use :xlink:href="`#icon-${item.icon}`"></use>
-				</svg>
-
+				<li v-for="i in [0,1,2,3,4,5]" v-bind:class="{active:currentTab === i}" v-on:click="currentTab=i">
+					<svg class="icon" >
+			    	<use v-bind:xlink:href="`#icon-${icons[i]}`"></use>
+			    	</svg>
 				</li>
+								
 			</ol>
 		</nav>
 			<ol class="panels">
-				<li v-for="item in resume.config" v-show="item.field ===selected">
-					
-					<div v-if="resume[item.field] instanceof Array">
-						<div class="subitem" v-for="subitem in resume[item.field] ">
-							<div class="resumeField" v-for="(value,key) in subitem">
-								<label>{{key}}</label>
-								<input type="text" :value="value">
-							</div>
-							<hr>	
-						</div>
+
+
+				<li v-bind:class="{active:currentTab === 0}">
+					<h2>个人信息</h2>
+					<el-form >
+					  <el-form-item label="姓名">
+					    <el-input v-model="profile.name" ></el-input>
+					  </el-form-item>
+					  <el-form-item label="城市">
+					    <el-input v-model="profile.city" ></el-input>
+					  </el-form-item>
+					  <el-form-item label="年龄">
+					    <el-input v-model="profile.age" ></el-input>
+					  </el-form-item>
+					</el-form>
+
+				</li>
+				<li v-bind:class="{active:currentTab === 1}">
+					<h2>工作经历</h2>
+
+					<div class="container" v-for="(work,index) in workHistory">
+						<el-form >
+						   <el-form-item label="公司">
+						    <el-input v-model="work.company" ></el-input>
+						  </el-form-item>
+						  <el-form-item label="工作内容">
+						    <el-input v-model="work.content" ></el-input>
+						  </el-form-item>
+						</el-form>
+						<i class="el-icon-delete" v-on:click="removeWorkHistory(index)" ></i>
+						<hr>
 					</div>
-				<div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
-
-					<label>{{key}}</label>
-					<input type="text" v-model="resume[item.field][key]">
-
-
-				</div>		
+					
+					<el-button type="primary" v-on:click="addWorkHistory">添加</el-button>
 				</li>
-				<li>
-					{{count}}
-					<button @click='add'>test</button>
+				<li v-bind:class="{active:currentTab === 2}">
+					<h2>学历信息</h2>
 				</li>
+				<li v-bind:class="{active:currentTab === 3}">
+					<h2>项目经历</h2>
+				</li>
+				<li v-bind:class="{active:currentTab === 4}">
+					<h2>获奖情况</h2>
+				</li>
+				<li v-bind:class="{active:currentTab === 5}">
+					<h2>联系方式</h2>
+				</li>
+				
+				
 
+				
 			</ol>
 
 	</div>
@@ -54,57 +78,38 @@
 		name: 'ResumeEditor',
 		data(){
 		return{
-			selected:'profile',
-			resume:{
-
-			config: [
-			{field: 'profile', icon: 'id'},
-			{field:  'work history', icon: 'work'},
-			{field:  'education', icon: 'book'},
-			{field: 'projects', icon:'heart'},
-			{field: 'awards', icon:'cup'},
-			{field: 'contacts',icon:'phone'},  
-
-			],
+			currentTab: 0,
+			icons: ['id','work','book','heart','cup','phone'],
 			profile:{
 				name:'',
 				city:'',
-				title:''
-			},	
-			'work history': [
-	            {company: 'AL', content: '我的第二份工作是'},
-	            {company: 'TX', content: '我的第一份工作是'},
-          ],
-			education:[
-				{school: 'AL', content: '文字'},
-				{school: 'TX', content: '文字'},
-			],
-			projects:[
-				{name: 'project A', content: '文字'},
-				{name: 'project B', content: '文字'},
+				age:''
+			},
+			workHistory:[
+			{ company:'', content:''	}
 
-			],
-			awards:[
-				{name: 'awards A', content: '文字'},
-				{name: 'awards B', content: '文字'},
-
-			],
-			contacts:[
-				{contact: 'phone', content: '13812345678'},
-				{content: 'qq' , content: '12345678'},
-			],
-			
-			}
+			]
+						
 		}
 	},
+			created(){
+								
+			},
 			computed: {
-				count () {
-				return this.$store.state.count
-				}
+				
 			},
 			methods:{
-				add (){
-				this.$store.commit('increment')
+				addWorkHistory(){
+					this.workHistory.push(
+					{ company:'', content:''	}
+					)
+										
+				},
+				removeWorkHistory(index){
+					if(index==0){
+					return;
+					}				
+					this.workHistory.splice(index,1)									
 				}
 			}
 			
@@ -142,11 +147,31 @@
 		}
 	}
 	> .panels{
+		.container{
+			position:relative;
+			
+			.el-icon-delete{
+				position:absolute;
+				right:0;
+				top:10px;
+			}
+		}
+
 
 		flex-grow: 1;
+
 		> li{
+		display:none;
 		padding:24px;
+		overflow:auto;
+		height:100%;
+
+		&.active{
+			display:block;
 		}
+
+		}
+		
 	}
 
 
