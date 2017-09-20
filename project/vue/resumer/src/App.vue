@@ -1,12 +1,14 @@
 <template>
-    <div class=page>
+    <div id="page" v-bind:class="{show : hide}">
         <header>
-            <Topbar/>
+           <Topbar class="topbar" v-on:preview="preview"/>
         </header>
         <main>
-            <ResumeEditor v-bind:resume="resume"/>
-            <ResumePreview v-bind:resume="resume"/>
+            <ResumeEditor id="editor" v-bind:resume="resume"/>
+            <ResumePreview id="preview" v-bind:resume="resume"/>
+            <button class="exitpreview" @click="exitpreview">退出预览</button>
         </main>
+
     </div>
 </template>
 
@@ -25,14 +27,17 @@
 
 
 export default {
+
   created(){
-    document.body.insertAdjacentHTML('afterbegin',icons)
+       document.body.insertAdjacentHTML('afterbegin',icons)
   },
   name: 'app',
   store,
   components: {Topbar,ResumeEditor,ResumePreview},
   data(){
     return {
+
+      hide : false,
       resume:{
         profile:{
         name:'',
@@ -60,14 +65,21 @@ export default {
       }
     }
   },
-
+  methods:{
+    exitpreview(){
+      this.hide = false
+    },
+    preview(){
+      this.hide=true
+     }
+  }
 
  
 }
 </script>
 
 <style lang="scss">
-  .page{
+  #page{
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -91,15 +103,13 @@ export default {
   } 
   
   }
-  #resumeEditor{
+  .resumeEditor{
   width: 35%;
   background: #444;
   }
 
   #resumePreview{
-   flex-grow:1;
-   margin-left:16px;
-    background:　#777;
+   
   }
   svg.icon{
     height: 1em;
@@ -108,4 +118,32 @@ export default {
     vertical-align: -0.1em;
     font-size:16px;
   }
+.show .topbar{
+  display:none;
+}
+.show #editor{
+  display:none;
+}
+.show #preview{
+  margin:32px auto;
+  max-width:800px;
+}
+.exitpreview{
+  display:none;
+  width:72px;
+  height:32px;
+  border:none;
+  cursor:pointer;
+  font-size:18px;
+  background:#ddd;
+  color:#222;
+
+}
+.show .exitpreview{
+  display:inline-block;
+  position:fixed;
+  bottom:100px;
+  right:100px;
+
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<div id="resumeEditor">
+	<div class ="resumeEditor">
 		<nav>
 			<ol >
 
@@ -88,7 +88,7 @@
 
 
 <style lang="scss" scoped>
-#resumeEditor{
+.resumeEditor{
 	
 	background: #ffffff;
 	box-shadow:0 1px 3px 0 rgba(0,0,0,0.25);

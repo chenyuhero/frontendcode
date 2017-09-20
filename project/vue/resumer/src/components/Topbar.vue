@@ -18,7 +18,7 @@
 	export default{
 		methods:{
 			preview(){
-				alert(1)
+				
 				this.$emit('preview')
 			}
 		}
