@@ -5,7 +5,7 @@
 			<span class="logo">Resumer</span>
 			<div class="actions">
 				<button class="primary">保存</button>
-				<button>预览</button>
+				<button @click="preview">预览</button>
 			</div>
 		
 		</div>
@@ -16,8 +16,15 @@
 
 <script>
 	export default{
-	name : 'Topbar'
+		methods:{
+			preview(){
+				alert(1)
+				this.$emit('preview')
+			}
+		}
 	}		
+
+
 </script>
 <style scoped lang="scss">
 

@@ -4,8 +4,8 @@
             <Topbar/>
         </header>
         <main>
-            <ResumeEditor/>
-            <ResumePreview/>
+            <ResumeEditor v-bind:resume="resume"/>
+            <ResumePreview v-bind:resume="resume"/>
         </main>
     </div>
 </template>
@@ -25,12 +25,44 @@
 
 
 export default {
+  created(){
+    document.body.insertAdjacentHTML('afterbegin',icons)
+  },
   name: 'app',
   store,
   components: {Topbar,ResumeEditor,ResumePreview},
-  created(){
-    document.body.insertAdjacentHTML('afterbegin',icons)
-  }
+  data(){
+    return {
+      resume:{
+        profile:{
+        name:'',
+        city:'',
+        age:''
+      },
+      workHistory:[
+        { company:'', content:''}
+
+      ],
+      StudyHistory:[
+        {school:'',duration:'',degree:''}
+
+      ],
+      ProjectHistory:[
+        {projectName:'' ,projectContent:''  }
+      ],
+      Award:[
+
+        {awardName:'',awardContent:''}
+      ],
+      Cantant:
+        {QQ:'',phone:'',mail:''}
+      
+      }
+    }
+  },
+
+
+ 
 }
 </script>
 

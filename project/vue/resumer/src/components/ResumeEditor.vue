@@ -16,49 +16,34 @@
 
 
 				<li v-bind:class="{active:currentTab === 0}">
-					<h2>个人信息</h2>
-					<el-form >
-					  <el-form-item label="姓名">
-					    <el-input v-model="profile.name" ></el-input>
-					  </el-form-item>
-					  <el-form-item label="城市">
-					    <el-input v-model="profile.city" ></el-input>
-					  </el-form-item>
-					  <el-form-item label="年龄">
-					    <el-input v-model="profile.age" ></el-input>
-					  </el-form-item>
-					</el-form>
-
+					<ProfileEditor   v-bind:profile='resume.profile'/>
 				</li>
 				<li v-bind:class="{active:currentTab === 1}">
-					<h2>工作经历</h2>
-
-					<div class="container" v-for="(work,index) in workHistory">
-						<el-form >
-						   <el-form-item label="公司">
-						    <el-input v-model="work.company" ></el-input>
-						  </el-form-item>
-						  <el-form-item label="工作内容">
-						    <el-input v-model="work.content" ></el-input>
-						  </el-form-item>
-						</el-form>
-						<i class="el-icon-delete" v-on:click="removeWorkHistory(index)" ></i>
-						<hr>
-					</div>
 					
-					<el-button type="primary" v-on:click="addWorkHistory">添加</el-button>
+					<ItemsEditor v-bind:items='resume.workHistory' v-bind:labels="{company:'公司',content:'工作内容'}" tittle="工作经历"/>
 				</li>
 				<li v-bind:class="{active:currentTab === 2}">
-					<h2>学历信息</h2>
+					<ItemsEditor v-bind:items='resume.StudyHistory' v-bind:labels="{school:'学校',duration:'时间',degree:'学历'}" tittle="学历信息" />
 				</li>
 				<li v-bind:class="{active:currentTab === 3}">
-					<h2>项目经历</h2>
+					<ItemsEditor v-bind:items='resume.ProjectHistory' v-bind:labels="{projectName:'项目名称',projectContent:'项目内容'}" tittle="项目经历"/>
 				</li>
 				<li v-bind:class="{active:currentTab === 4}">
-					<h2>获奖情况</h2>
+					<ItemsEditor v-bind:items='resume.Award' v-bind:labels="{awardName:'奖项名称',awardContent:'奖项内容'}" tittle="获奖情况"/>
 				</li>
 				<li v-bind:class="{active:currentTab === 5}">
-					<h2>联系方式</h2>
+								<h2>联系方式</h2>
+						<el-form >
+						  <el-form-item label="QQ">
+						    <el-input v-model="resume. Cantant.qq" ></el-input>
+						  </el-form-item>
+						  <el-form-item label="	邮箱">
+						    <el-input v-model="resume. Cantant.mail" ></el-input>
+						  </el-form-item>
+						  <el-form-item label="电话">
+						    <el-input v-model="resume. Cantant.phone" ></el-input>
+						  </el-form-item>
+						</el-form>
 				</li>
 				
 				
@@ -73,45 +58,28 @@
 
 <script>
 
+	
+	import ProfileEditor from './ProfileEditor'
+	import ItemsEditor from './ItemsEditor'
+	
 	export default {
+		props:['resume'],
+		components:{ 
+			
+			ProfileEditor,
+			ItemsEditor
 
-		name: 'ResumeEditor',
+		},
+		
 		data(){
-		return{
+		 return{
 			currentTab: 0,
 			icons: ['id','work','book','heart','cup','phone'],
-			profile:{
-				name:'',
-				city:'',
-				age:''
-			},
-			workHistory:[
-			{ company:'', content:''	}
-
-			]
+						
 						
 		}
 	},
-			created(){
-								
-			},
-			computed: {
-				
-			},
-			methods:{
-				addWorkHistory(){
-					this.workHistory.push(
-					{ company:'', content:''	}
-					)
-										
-				},
-				removeWorkHistory(index){
-					if(index==0){
-					return;
-					}				
-					this.workHistory.splice(index,1)									
-				}
-			}
+						
 			
 		}
 	
