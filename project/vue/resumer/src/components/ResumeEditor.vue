@@ -32,16 +32,16 @@
 					<ItemsEditor v-bind:items='resume.Award' v-bind:labels="{awardName:'奖项名称',awardContent:'奖项内容'}" tittle="获奖情况"/>
 				</li>
 				<li v-bind:class="{active:currentTab === 5}">
-								<h2>联系方式</h2>
+						<h2>联系方式</h2>
 						<el-form >
 						  <el-form-item label="QQ">
-						    <el-input v-model="resume. Cantant.qq" ></el-input>
+						    <el-input v-model="resume.Cantant.qq" ></el-input>
 						  </el-form-item>
 						  <el-form-item label="	邮箱">
-						    <el-input v-model="resume. Cantant.mail" ></el-input>
+						    <el-input v-model="resume.Cantant.mail" ></el-input>
 						  </el-form-item>
 						  <el-form-item label="电话">
-						    <el-input v-model="resume. Cantant.phone" ></el-input>
+						    <el-input v-model="resume.Cantant.phone" ></el-input>
 						  </el-form-item>
 						</el-form>
 				</li>

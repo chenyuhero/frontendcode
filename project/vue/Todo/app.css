@@ -8,6 +8,9 @@ ol li{
 	margin-left:auto;
 	margin-right:auto;
 }
+#app{
+	border:1px solid red;
+}
 #app .signUp{
 	border:1px solid green;
 }
