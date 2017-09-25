@@ -136,9 +136,7 @@
 	.inputbutton:hover{
 		opacity: 0.8;
 	}
-	.mail{
-		fill: rgb(138,138,138);
-	}
+	
 	.show #regist{
 		display: block;
 	}

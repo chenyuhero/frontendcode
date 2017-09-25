@@ -1,6 +1,10 @@
 <template>
 	<div>
-		这是已完成列表
+		<ul>
+      		<li v-for="done in doneList">
+      			{{done.title}}
+      		</li>	
+      	</ul>
 	</div>
 
 </template>
@@ -10,3 +14,12 @@
 
 
 </style>
+<script >
+	 export default {
+	 	props:['doneList']
+
+	 }
+
+
+
+</script>
