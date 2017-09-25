@@ -2,19 +2,32 @@
 	<div>
 		
 		<div class="newTask">
-			<input v-bind:class="{showi:showi}" type="text" v-model="newTodo" @keypress.enter="addTodo" placeholder="输入任务，按Enter键完成">
+			<input  type="text" v-model="newTodo" @keypress.enter="addTodo" placeholder="输入任务，按Enter键完成">
         </div>
 		
-      <ol class="todos">
+      <ul class="todos">
         <li v-for="todo in todoList">
-       	  <input type="checkbox" v-model="todo.done"> {{ todo.title }}	
-         
-          <span v-if="todo.done">已完成</span>
-          <span v-else>未完成</span>
-           <button @click="removeTodo(todo)">X</button>
-        </li>
-      </ol>
+        	<span>
+        		{{ todo.title }}	         
+          	<svg class="icon" @click="Todone">
+	    		<use xlink:href="#icon-dui4"></use>
+			</svg>
+			<svg class="icon " @click="removeTodo"  >
+	    		<use xlink:href="#icon-false-circle"></use>
+			</svg>
 
+        	</span>
+       	   
+           	
+        </li>
+      </ul>
+
+      <ul>
+      	<li v-for="done in doneList" >
+      		{{done.title}}
+
+      	</li>
+      </ul>
 	</div>
 	 
 
@@ -25,9 +38,9 @@
 	 export default {
 	 	data(){
 	 		return{
-	 			showi : false,
 	 			newTodo: '',
-    			todoList: []
+    			todoList: [],
+    			doneList: []
 	 		}
 	 	},
 	  methods: {
@@ -41,41 +54,53 @@
       this.newTodo='',
       this.showi=false
     },
-    removeTodo: function(todo){
+     removeTodo: function(todo){
       let index = this.todoList.indexOf(todo) // Array.prototype.indexOf 是 ES 5 新加的 API
       this.todoList.splice(index,1) // 不懂 splice？赶紧看 MDN 文档！
     },
-    addnew(){
-    	this.showi=true
-    	console.log("先领了")
+    Todone: function(todo){
+    	let index = this.todoList.indexOf(todo) 
+    	this.doneList.push({
+      	title:this.todoList[index+1].title,
+      	createdAt:this.todoList[index+1].createdAt,
+    	doneAt: new Date(),
+       	})
+       	this.removeTodo(todo)
+       	console.log('运行了')
+       	
+       
     }
+    
   }
 }
 </script>
 
-<style>
-	
-	.bar{
+<style scoped>
+
+	#circle{
+		fill: rgb(88,208,67);
+	}
+	ul li{
+
+		margin: 8px auto;
 		display: flex;
-		justify-content: flex-start;
-		align-items: center;
-		margin-top:8px; 
-		margin-left:8px;
-		margin-right:8px;  
-		margin-bottom: 0;
+		align-content: center;
 		height: 45px;
-		background: rgb(214,244,254);
-		color:rgb(32,160,255);
+
 	}
-	.bar span{
-		padding: 8px;
-	}
-	
+	ul li span{
+		padding: 8px 8px;
+		display: inline-block;
+		text-align: center;
+		line-height: 32px;
+		background: rgb(255,237,231);
+	}	
 	.newTask  input{
 	  	margin: 8px 8px;
 	 	padding: 8px;
 	 	border: none;
-	 	background: rgb(214,244,254);
+	 	background: rgb(255,237,231);
+	 	
 		width: 704px;
 		height: 37px;
 	}

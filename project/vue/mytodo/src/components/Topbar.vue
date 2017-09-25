@@ -17,27 +17,36 @@
 		<div v-bind:class="{show : loginr}" >
 			<div id="regist" >
 			  	<div class="panel">
-			  	
-			  		<header>
-                    	<span class="close" @click="close">×</span>
-                   		<h3>现在Todo
-                    		<svg class="icon" aria-hidden="true">
-    							<use xlink:href="#icon-dui"></use>
+			  	  	<header>
+	                    <span class="close" @click="close">×</span>
+	                    <h3>现在Todo
+	                    	<svg class="icon">
+	    					<use xlink:href="#icon-dui"></use>
 							</svg>
 						</h3>
-            	    </header>
-                	<main>
-	                    <el-input class="input"  placeholder="邮箱"></el-input>
-	                    <el-input class="input"  placeholder="密码"></el-input>
-	                    <el-input class="input"  placeholder="确认密码"></el-input>
-                	</main>
+	                </header>
+	                <main>
+	                	<div class="inputbox">
+	                		
+	                		<input type="text" placeholder="邮箱" >
+	                	</div>
+	                    <div class="inputbox">
+	                    	
+							<input  type="password" placeholder="密码">
+	                    </div>
+	                    <div class="inputbox">
+	                    	
+							<input  type="password" placeholder="确认密码">
+	                    </div>
+	                 </main>
 	                <footer>
 	                	<div>
-	                		<el-button type="primary">提交注册</el-button>
+	                		<input class="inputbutton" type="submit"  value="提交">
+
 	                	</div>
-							
-	                </footer>
-        		</div>
+						   			                	
+					</footer>
+			 	</div>
 		    </div>		
        </div>		
 
@@ -47,24 +56,29 @@
 			  	  	<header>
 	                    <span class="close" @click="close">×</span>
 	                    <h3>现在Todo
-	                    	<svg class="icon" aria-hidden="true">
+	                    	<svg class="icon">
 	    					<use xlink:href="#icon-dui"></use>
 							</svg>
 						</h3>
 	                </header>
 	                <main>
-	                    <el-input class="input"  placeholder="邮箱"></el-input>
-	                    <el-input class="input"  placeholder="密码"></el-input>
-
+	                	<div class="inputbox">
+	                		
+	                		<input type="text" placeholder="邮箱" >
+	                	</div>
+	                    <div class="inputbox">
+	                    	
+							<input  type="password" placeholder="密码">
+	                    </div>
+	                   
 	                </main>
 	                <footer>
 	                	<div>
-	                		<el-button type="primary">登录</el-button>
+	                		<input class="inputbutton" type="submit"  value="登录">
+
 	                	</div>
-						<div>
-							<el-button type="text">忘记密码</el-button>
-							<el-button type="text">没有账号</el-button>
-						</div>
+						   	<a href="">没有账号?</a>
+		                	<a href="">忘记密码</a>
 					</footer>
 			 	</div>
             </div>
@@ -107,7 +121,24 @@
   }
 </script>
 <style scoped >
-	
+	.inputbutton{
+		height: 35px;
+		width: 250px;
+		border-radius: 12px;
+		border: none;
+		background:rgb(32,160,255);
+		color: white;
+		cursor: pointer; 
+	}
+	.inputbutton:focus{
+		outline: none;
+	}
+	.inputbutton:hover{
+		opacity: 0.8;
+	}
+	.mail{
+		fill: rgb(138,138,138);
+	}
 	.show #regist{
 		display: block;
 	}
@@ -159,8 +190,8 @@
 	}
 	
 	.panel{
-		border-radius: 5px;
-		border-radius: 5px;
+		overflow: hidden;
+		border-radius: 10px;
 		position: absolute;
         top: 50%;
         left: 50%;
@@ -172,7 +203,8 @@
 	}
 
 	 .panel header{
-	    background-color: #009688;
+
+	    background-color:rgb(32,160,255);
 	    padding: 1px 16px;
 	    color: #fff;
 	}
@@ -184,11 +216,17 @@
 	    cursor: pointer;
 	}
 
-	 .panel main {
+	 #login .panel main {
 	    padding: 16px;
+	    height: 115px;
 	    
 	}
-	
+	#regist .panel main {
+	    padding: 16px;
+	    height: 149px;
+	    
+	}
+
 	 .panel main .input{
 		margin: 8px auto;
 	}
@@ -200,4 +238,22 @@
 		display: none;
 	}
 	
+	main input{
+		height: 35px;
+		width: 250px;
+		border-top:none; 
+		border-left:none; 
+		border-right:none; 
+	}
+	main input:focus{
+		outline:  none;
+	}
+	.inputbox{
+		margin:8px auto;
+	}
+	footer a{
+		color: #DEDEDE;
+		display: inline-block;
+		margin: 8px 8px;
+	}
 </style>

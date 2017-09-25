@@ -3,6 +3,7 @@
      
     <Topbar/>
     <main class="layout">
+      <Rate class="rate"/>
       <Todo class="todo"/>
       <Done class="done"/>
     </main>
@@ -13,6 +14,7 @@
 <script>
 
 import Topbar from './components/Topbar'
+import Rate from './components/Rate'
 import Todo from './components/Todo'
 import Done from './components/Done'
 export default {
@@ -20,12 +22,19 @@ export default {
   components: {
       Topbar,
       Todo,
-      Done
+      Done,
+      Rate
   }
 }
 </script>
 
 <style>
+ul li{
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -44,6 +53,9 @@ export default {
   margin: 16px auto;
   width: 1240px;
   display: inline-flex;
+  }
+  .rate{
+    width: 200px;
   }
 .todo{
   
