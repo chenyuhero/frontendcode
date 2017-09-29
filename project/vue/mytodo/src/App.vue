@@ -1,13 +1,7 @@
 <template>
   <div id="app">
-     
     <Topbar/>
-    
-     
     <Todo />
-     
-    
-    
   </div>
 </template>
 
@@ -26,7 +20,7 @@ export default {
 
 }
 </script>
-
+   
 <style>
 ul li{
   list-style: none;
@@ -35,10 +29,7 @@ a {
   text-decoration: none;
 }
 #app {
-    background:url(https://thumbs.dreamstime.com/z/%E8%80%81%E4%B9%A6%E5%BC%80%E5%BC%A0-4184358.jpg);
-    background-size:80px 60px;
-    background-repeat:no-repeat;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

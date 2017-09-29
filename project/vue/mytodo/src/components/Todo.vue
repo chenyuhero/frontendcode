@@ -50,10 +50,6 @@
 	      	</div> 	
 	</div>
 
-
- 
-
-
 </template>
 
 <script >
@@ -96,8 +92,7 @@
 		      		this.todoList[i].splice(index,1) // 不懂 splice？赶紧看 MDN 文档！
 		    	}
 		  	}
-		  	
-		  	
+			  	
 		}
 
 </script>
@@ -110,15 +105,13 @@
 		border: 3px solid #C6E2FF;
 	}
 	.layout{
-	
-  	  margin: 16px auto;
+	  margin: 16px auto;
 	  width: 1240px;
 	  display: inline-flex;
 	  }
   
 	.todo{
-	  
-	  border: 1px solid #CCCCCC;
+	   border: 1px solid #CCCCCC;
 	  height: 800px;
 	  flex-grow: 1; 
 	}

@@ -98,7 +98,7 @@
       return {
       	loginr : false ,
       	hidel : false ,
-       }
+      }
     },
     methods: {
       onSubmit() {
@@ -106,17 +106,24 @@
       },
       login(){
       	this.hidel = true;
-      	console.log("显示了登录")
-      },
+         },
       regist(){
       	this.loginr = true;
-      	console.log("显示了注册")
-      },
+         },
       close(){
       	this.loginr = false;
       	this.hidel = false;
       	console.log("关闭")
-      }
+      },
+       signUp: function () {
+      let user = new AV.User();
+      user.setUsername(this.formData.username);
+      user.setPassword(this.formData.password);
+      user.signUp().then(function (loginedUser) {
+        console.log(loginedUser);
+      }, function (error) {
+      });
+    }
     }
   }
 </script>
