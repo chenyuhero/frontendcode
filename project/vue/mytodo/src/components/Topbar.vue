@@ -63,8 +63,7 @@
 	                </header>
 	                <main>
 	                	<div class="inputbox">
-	                		
-	                		<input type="text" placeholder="邮箱" >
+	                		   		<input type="text" placeholder="邮箱" >
 	                	</div>
 	                    <div class="inputbox">
 	                    	
@@ -101,10 +100,7 @@
       }
     },
     methods: {
-      onSubmit() {
-        console.log('submit!');
-      },
-      login(){
+        login(){
       	this.hidel = true;
          },
       regist(){
@@ -116,11 +112,11 @@
       	console.log("关闭")
       },
        signUp: function () {
-      let user = new AV.User();
-      user.setUsername(this.formData.username);
-      user.setPassword(this.formData.password);
-      user.signUp().then(function (loginedUser) {
-        console.log(loginedUser);
+      	let user = new AV.User();
+      	user.setUsername(this.formData.username);
+      	user.setPassword(this.formData.password);
+     	 user.signUp().then(function (loginedUser) {
+       	 console.log(loginedUser);
       }, function (error) {
       });
     }
