@@ -8,7 +8,14 @@
      <Work class="work"/>
      <Contact class="contact"/>
      <Footer class="footer"/>
+
     </main>
+    <div id="gotop">
+      <svg class="icon" v-on:click="gotop">
+             <use xlink:href="#icon-huojian"></use>
+      </svg>
+        
+    </div>
     
   </div>
 </template>
@@ -31,6 +38,14 @@ export default {
     About,
     Contact,
     Footer
+  },
+  methods:{
+    gotop :function(){
+      console.log(document.html.scrollTop)
+     
+      console.log('飞天')
+    }
+
   }
 }
 </script>
@@ -75,4 +90,15 @@ export default {
   padding:30px 0;
   background:rgb(256,256,247);
 }
+#gotop svg{
+    color: rgb(181,181,181);
+    position: fixed;
+    bottom:60px;
+    right: 50px; 
+    cursor: pointer;
+  }
+   #gotop i:hover{
+    opacity: 0.8;
+   }
+
 </style>

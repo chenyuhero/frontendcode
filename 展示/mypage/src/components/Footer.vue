@@ -12,17 +12,17 @@
 			<div class="logo">
 				<a>
 				<svg class="icon" >
-			    <use xlink:href="#icon-weibo-copy"></use>
+			    <use xlink:href="#icon-weibo"></use>
 				</svg>
 				</a>
 				<a>
 				<svg class="icon" >
-			    <use xlink:href="#icon-Git"></use>
+			    	<use xlink:href="#icon-git"></use>
 				</svg>
 				</a>
 				<a>
 				<svg class="icon" >
-			    <use xlink:href="#icon-tiitter"></use>
+			   		 <use xlink:href="#icon-twitter"></use>
 				</svg>
 				</a>
 			</div>

@@ -6,7 +6,18 @@
 		<div class="show">
 			<h2 class="title">作品展示</h2>
 
-			<div>作品一</div>
+			<div>
+				<img src=""> </img>
+				<h3>在线音乐FM</h3>
+				<div>
+					描述：
+					涉及技术:
+				</div>
+				<div>
+					ico
+				</div>	
+				
+			</div>
 			<div>作品一</div>
 			<div>作品一</div>
 			<div>作品一</div>
