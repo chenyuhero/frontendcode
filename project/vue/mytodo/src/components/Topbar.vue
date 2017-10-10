@@ -8,8 +8,8 @@
 				</svg>
 			</span>
 			<div class="actions">
-				<el-button @click="login"  >登录</el-button>
-				<el-button @click="regist" type="primary">注册</el-button>
+				<el-button @click="login" v-model="actionType" value="signUp">登录</el-button>
+				<el-button @click="regist" type="primary" v-model="actionType" value="login">注册</el-button>
 				
 			</div>
 		</div>
@@ -41,7 +41,7 @@
 	                 </main>
 	                <footer>
 	                	<div>
-	                		<input class="inputbutton" type="submit"  value="提交">
+	                		<input class="inputbutton" type="submit" value="提交">
 
 	                	</div>
 						   			                	
@@ -52,7 +52,7 @@
 
 		<div v-bind:class="{hide : hidel}">
 			<div id="login"  >
-			  	<div class="panel">
+			  	<div class="panel" @submit.prevent=signup>
 			  	  	<header>
 	                    <span class="close" @click="close">×</span>
 	                    <h3>现在Todo
@@ -63,11 +63,11 @@
 	                </header>
 	                <main>
 	                	<div class="inputbox">
-	                		   		<input type="text" placeholder="邮箱" >
+	                		   	<input type="text" v-model="formData.email" placeholder="邮箱" >
 	                	</div>
 	                    <div class="inputbox">
 	                    	
-							<input  type="password" placeholder="密码">
+							<input  type="password" v-model="formData.password" placeholder="密码">
 	                    </div>
 	                   
 	                </main>
@@ -97,6 +97,11 @@
       return {
       	loginr : false ,
       	hidel : false ,
+      	actionType:'signUp',
+      	formData:{
+      		email:'',
+      		password:''
+      	}
       }
     },
     methods: {

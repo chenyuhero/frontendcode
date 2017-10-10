@@ -4,7 +4,7 @@
 		<div class="pic" >
 			<div class="type">
 			<h1>Stay foolish,stay hungry.</h1>
-			<span>不断地去探索新的事物</span>
+			
 			
 			</div>
 		</div>
@@ -22,6 +22,9 @@
 </script>
 <style>
 	
+	@keyframes type{
+    from { width: 0;}
+	}
 	#home{
 	width:1280px;
 	color:white;
@@ -41,5 +44,10 @@
 	width:500px;
 	float:right;
 	margin-top:150px;
+	
+	}
+	.type >h1{
+		 width:100%;
+		animation: type 2s steps(50, end) forwards;
 	}
 </style>
