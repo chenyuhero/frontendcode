@@ -63,6 +63,21 @@
     			tags:['重要并且紧急','重要但不紧急','不重要但紧急','不重要不紧急']
 	 		}
 	 	},
+	 	created:function(){
+	 		 window.onbeforeunload = ()=>{
+		      let dataString1 = JSON.stringify(this.todoList) 
+		      window.localStorage.setItem('myTodos', dataString1) 
+		      let dataString2 = JSON.stringify(this.doneList) 
+		      window.localStorage.setItem('mydones', dataString2) 
+		    }
+		    let oldDataString1 = window.localStorage.getItem('myTodos')
+		    let oldData1 = JSON.parse(oldDataString1)
+		    this.todoList = oldData1 ||[[],[],[],[]]
+		    let oldDataString2 = window.localStorage.getItem('mydones')
+		    let oldData2 = JSON.parse(oldDataString2)
+		    this.doneList = oldData2 ||[[],[],[],[]]
+		     
+	 	},
 	  methods: {
 	  		addTodo: function(i){
 	  		console.log(i)
