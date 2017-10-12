@@ -79,6 +79,15 @@
 		     
 	 	},
 	  methods: {
+	  		signUp: function () {
+      			let user = new AV.User();
+      			user.setUsername(this.formData.username);
+      			user.setPassword(this.formData.password);
+      			user.signUp().then(function (loginedUser) {
+        		console.log(loginedUser);
+      			}, function (error) {
+      			});
+    		},
 	  		addTodo: function(i){
 	  		console.log(i)
 	  		 console.log(this.todoList[i])		

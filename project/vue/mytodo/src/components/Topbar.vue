@@ -17,43 +17,48 @@
 		<div v-bind:class="{show : loginr}" >
 			<div id="regist" >
 			  	<div class="panel">
-			  	  	<header>
+			  		<form @submit.prevent='signUp' >
+			  			<header>
 	                    <span class="close" @click="close">×</span>
 	                    <h3>现在Todo
 	                    	<svg class="icon">
 	    					<use xlink:href="#icon-dui"></use>
 							</svg>
 						</h3>
-	                </header>
-	                <main>
-	                	<div class="inputbox">
-	                		
-	                		<input type="text" placeholder="邮箱" >
-	                	</div>
-	                    <div class="inputbox">
-	                    	
-							<input  type="password" placeholder="密码">
-	                    </div>
-	                    <div class="inputbox">
-	                    	
-							<input  type="password" placeholder="确认密码">
-	                    </div>
-	                 </main>
-	                <footer>
-	                	<div>
-	                		<input class="inputbutton" type="submit" value="提交">
+		                </header>
+		                <main>
+		                	<div class="inputbox">
+		                		
+		                		<input type="text" placeholder="邮箱" v-model="formData.mail" >
+		                	</div>
+		                    <div class="inputbox">
+		                    	
+								<input  type="password" placeholder="密码" v-model="formData.password">
+		                    </div>
+		                    <div class="inputbox">
+		                    	
+								<input  type="password" placeholder="确认密码" v-model="formData.password">
+		                    </div>
+		                 </main>
+		                <footer>
+		                	<div>
+		                		<input class="inputbutton" type="submit" value="提交">
 
-	                	</div>
-						   			                	
-					</footer>
+		                	</div>
+							                	
+						</footer>
+
+			  		</form>
+			  	  	
 			 	</div>
 		    </div>		
        </div>		
 
 		<div v-bind:class="{hide : hidel}">
 			<div id="login"  >
-			  	<div class="panel" @submit.prevent=signup>
-			  	  	<header>
+			  	<div class="panel" >
+			  		<form>
+			  			<header>
 	                    <span class="close" @click="close">×</span>
 	                    <h3>现在Todo
 	                    	<svg class="icon">
@@ -79,6 +84,8 @@
 						   	<a href="">没有账号?</a>
 		                	<a href="">忘记密码</a>
 					</footer>
+			  		</form>
+			  	  	
 			 	</div>
             </div>
 		</div>
@@ -93,6 +100,7 @@
 
 <script>
   export default {
+  	props:['AV'],
     data() {
       return {
       	loginr : false ,
@@ -105,6 +113,15 @@
       }
     },
     methods: {
+    	signUp: function () {
+  			let user = new AV.User();
+  			user.setUsername(this.formData.username);
+  			user.setPassword(this.formData.password);
+  			user.signUp().then(function (loginedUser) {
+    		console.log(loginedUser);
+  			}, function (error) {
+  			});
+		},
         login(){
       	this.hidel = true;
          },
