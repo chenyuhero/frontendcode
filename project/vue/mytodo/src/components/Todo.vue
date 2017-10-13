@@ -1,7 +1,104 @@
 <template>
-	<div class="layout" >
-		
+	<div>
+		<div id="topbar">
 
+		<div class="wrapper">
+			<span class="logo">Todo
+				<svg class="icon" aria-hidden="true">
+				<use xlink:href="#icon-dui"></use>
+				</svg>
+			</span>
+			<div class="actions" v-if="!currentUser">
+				<el-button @click="showlogin" v-model="actionType" value="signUp">登录</el-button>
+				<el-button @click="regist" type="primary" v-model="actionType" value="login">注册</el-button>
+				
+			</div>
+			<div class="actions" v-if="currentUser">
+				<el-button  v-model="actionType" @click="logout" value="logoff">注销</el-button>
+				
+				
+			</div>
+		</div>
+
+		<div v-bind:class="{show : loginr}" >
+			<div id="regist" >
+			  	<div class="panel">
+			  		<form @submit.prevent='signUp' >
+			  			<header>
+	                    <span class="close" @click="close">×</span>
+	                    <h3>现在Todo
+	                    	<svg class="icon">
+	    					<use xlink:href="#icon-dui"></use>
+							</svg>
+						</h3>
+		                </header>
+		                <main>
+		                	<div class="inputbox">
+		                		
+		                		<input type="text" placeholder="邮箱" v-model="formData.username" >
+		                	</div>
+		                    <div class="inputbox">
+		                    	
+								<input  type="password" placeholder="密码" v-model="formData.password">
+		                    </div>
+		                    <div class="inputbox">
+		                    	
+								<input  type="password" placeholder="确认密码" v-model="formData.password">
+		                    </div>
+		                 </main>
+		                <footer>
+		                	<div>
+		                		<input class="inputbutton" type="submit" @click="close" value="提交">
+
+		                	</div>
+							                	
+						</footer>
+
+			  		</form>
+			  	  	
+			 	</div>
+		    </div>		
+       </div>		
+
+		<div v-bind:class="{hide : hidel}">
+			<div id="login"  >
+			  	<div class="panel" >
+			  		<form  @submit.prevent="login">
+			  			<header>
+	                    <span class="close" @click="close">×</span>
+	                    <h3>现在Todo
+	                    	<svg class="icon">
+	    					<use xlink:href="#icon-dui"></use>
+							</svg>
+						</h3>
+	                </header>
+	                <main>
+	                	<div class="inputbox">
+	                		   	<input type="text" v-model="formData.username" placeholder="邮箱" >
+	                	</div>
+	                    <div class="inputbox">
+	                    	
+							<input  type="password" v-model="formData.password" placeholder="密码">
+	                    </div>
+	                   
+	                </main>
+	                <footer>
+	                	<div>
+	                		<input class="inputbutton" type="submit"  @click="close" value="登录">
+
+	                	</div>
+						   	<a href="">没有账号?</a>
+		                	<a href="">忘记密码</a>
+					</footer>
+			  		</form>
+			  	  	
+			 	</div>
+            </div>
+		</div>
+                
+		</div>
+
+		<div class="layout" >
 		<div class="rate">
 			<div v-for="i in [0,1,2,3]"  class="bar"  v-bind:class="{active:currentTab === i , bar1 : 0 == i, bar2 : 1 == i,bar3 : 2 == i,bar4 : i == 3}" v-on:click="currentTab=i">
 					{{tags[i]}}
@@ -48,11 +145,14 @@
 
 	      	</ul>	
 	      	</div> 	
+		</div>
 	</div>
+	
 
 </template>
 
 <script >
+	 import AV from 'leancloud-storage'
 	 export default {
 	 	data(){
 	 		return{
@@ -60,26 +160,75 @@
 	 			newTodo: '',
     			todoList:[[],[],[],[]],
     			doneList:[[],[],[],[]],
-    			tags:['重要并且紧急','重要但不紧急','不重要但紧急','不重要不紧急']
-	 		}
+    			tags:['重要并且紧急','重要但不紧急','不重要但紧急','不重要不紧急'],
+    			loginr : false ,
+      			hidel : false ,
+      			actionType:'signUp',
+      			currentUser: null,
+		      	formData:{
+		      		username:'',
+		      		password:''
+		      	}
+			 		}
 	 	},
 	 	created:function(){
-	 		 window.onbeforeunload = ()=>{
-		     let dataString1 = JSON.stringify(this.todoList) 
-		     window.localStorage.setItem('myTodos', dataString1) 
-		     let dataString2 = JSON.stringify(this.doneList) 
-		     window.localStorage.setItem('mydones', dataString2) 
-		    }
-		    let oldDataString1 = window.localStorage.getItem('myTodos')
-		    let oldData1 = JSON.parse(oldDataString1)
-		    this.todoList = oldData1 ||[[],[],[],[]]
-		    let oldDataString2 = window.localStorage.getItem('mydones')
-		    let oldData2 = JSON.parse(oldDataString2)
-		    this.doneList = oldData2 ||[[],[],[],[]]
-		     
-	 	},
+  			this.currentUser = this.getCurrentUser();
+  			this.fetchTodos()
+  		},
+	 	
 	  methods: {
-	  		
+	  		 fetchTodos: function(){
+	  		 	if(this.currentUser){
+		       	var query = new AV.Query('AllTodos');
+		       	query.find()
+		         .then( (todos)=> {
+		           let avAllTodos = todos[0]
+		           let id = avAllTodos.id
+		           this.todoList = JSON.parse(avAllTodos.attributes.content1)
+		           this.todoList.id = id
+		         }, function(error){
+		           console.error(error) 
+		         })
+		      }
+	  		 },
+	  		updateTodos: function(){
+		       // 想要知道如何更新对象，先看文档 https://leancloud.cn/docs/leanstorage_guide-js.html#更新对象
+		       let dataString1 = JSON.stringify(this.todoList) // JSON 在序列化这个有 id 的数组的时候，会得出怎样的结果？
+		       let avTodos = AV.Object.createWithoutData('AllTodos', this.todoList.id)
+		       avTodos.set('content1', dataString1)
+		       avTodos.save().then(()=>{
+		         console.log('更新成功')
+		       })
+		     },
+		  	saveTodos:function(){
+	 		 let dataString1 = JSON.stringify(this.todoList) 
+		     let dataString2 = JSON.stringify(this.doneList) 
+		     var AVTodos = AV.Object.extend('AllTodos');
+      		 var avTodos = new AVTodos();
+      		 var acl = new AV.ACL()
+       		 acl.setReadAccess(AV.User.current(),true) 
+       		 acl.setWriteAccess(AV.User.current(),true) 
+      		 avTodos.set('content1', dataString1);
+      		 avTodos.set('content2', dataString2);
+      		 avTodos.setACL(acl)
+      		 avTodos.save().then( (todo)=> {
+        		 // 成功保存之后，执行其他逻辑.
+        		this.todoList.id = todo.id 
+        	 	console.log('保存成功');
+        	}, function (error) {
+        		// 异常处理
+        		 console.error('保存失败');
+      		 });
+		    
+		    		     
+	 		},
+			saveOrUpdateTodos: function(){
+		       if(this.todoList.id){
+		         this.updateTodos()
+		       }else{
+		         this.saveTodos()
+		       }
+		     },
 	  		addTodo: function(i){
 	  		console.log(i)
 	  		 console.log(this.todoList[i])		
@@ -89,6 +238,7 @@
 		        done: false // 添加一个 done 属性
 		      })
 		      this.newTodo = ''
+		      this.saveOrUpdateTodos()
 		    },
 	   
 		    Todone: function(todo,i){
@@ -101,13 +251,63 @@
 		     		doneAt: new Date()
 		     	})
 		     	 this.todoList[i].splice(index,1)
+		     	  this.saveOrUpdateTodos()
 		  		},
 		 		  
-		      removeTodo: function(todo,i){
-		      		let index = this.todoList[i].indexOf(todo) 
-		      		this.todoList[i].splice(index,1) // 不懂 splice？赶紧看 MDN 文档！
-		    	}
-		  	}
+	     	removeTodo: function(todo,i){
+	      		let index = this.todoList[i].indexOf(todo) 
+	      		this.todoList[i].splice(index,1) 
+	      		this.saveOrUpdateTodos()
+	    	},
+	    	signUp: function () {
+		      let user = new AV.User();
+		      user.setUsername(this.formData.username);
+		      user.setPassword(this.formData.password);
+		      user.signUp().then((loginedUser) => { // 👈，将 function 改成箭头函数，方便使用 this
+		        this.currentUser = this.getCurrentUser() // 👈
+		        console.log("我运行了")
+		      }, (error) => {
+		        alert('注册失败') // 👈
+		      });
+		    },
+		    login: function () {
+		      AV.User.logIn(this.formData.username, this.formData.password).then((loginedUser) => { // 👈
+		        this.currentUser = this.getCurrentUser() 
+		        this.fetchTodos()
+		      }, function (error) {
+		        alert('登录失败') // 👈
+		      });
+		    },
+		    getCurrentUser: function () { // 👈
+		       let current = AV.User.current()
+		       if (current) {
+		         let {id, createdAt, attributes: {username}} = current
+		         // 上面这句话看不懂就得看 MDN 文档了
+		         // 我的《ES 6 新特性列表》里面有链接：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+		         return {id, username, createdAt} // 看文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Object_initializer#ECMAScript_6%E6%96%B0%E6%A0%87%E8%AE%B0
+		       } else {
+		         return null
+		       }
+		    },
+		    logout: function () {
+		       alert(this.currentUser.username + "注销成功")
+		       AV.User.logOut()
+		       this.currentUser = null
+		       window.location.reload()
+
+		      },
+		  showlogin(){
+		  	this.hidel = true;
+		     },
+		  regist(){
+		  	this.loginr = true;
+		     },
+		  close(){
+		  	this.loginr = false;
+		  	this.hidel = false;
+		  	
+		  },
+	  	}
 			  	
 		}
 
@@ -215,5 +415,139 @@
 	}
 	.todo .active{
 		display: block;
+	}
+
+	.inputbutton{
+		height: 35px;
+		width: 250px;
+		border-radius: 12px;
+		border: none;
+		background:rgb(32,160,255);
+		color: white;
+		cursor: pointer; 
+	}
+	.inputbutton:focus{
+		outline: none;
+	}
+	.inputbutton:hover{
+		opacity: 0.8;
+	}
+	
+	.show #regist{
+		display: block;
+	}
+
+	.hide #login{
+		display: block;
+	}
+	#topbar{
+	background: #ffffff;
+	box-shadow:0 1px 3px 0 rgba(0,0,0,0.25);
+	height:75px;
+	}
+
+	.wrapper{
+	min-width:1024px;
+	max-width:1240px;
+	margin:0 auto;
+	height:75px;
+	}
+	.wrapper{
+	display:flex;
+	justify-content: space-between;
+	align-items:center;
+	}
+
+	.logo{
+	font-size:24px;
+	color:#000000;
+	}
+	
+	#regist {
+		position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+
+
+	}
+	 #login{
+		position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        
+	}
+	
+	.panel{
+		overflow: hidden;
+		border-radius: 10px;
+		position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        height: 300px;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+
+	 .panel header{
+
+	    background-color:rgb(32,160,255);
+	    padding: 1px 16px;
+	    color: #fff;
+	}
+
+ 	 .panel .close {
+	    float: right;
+	    margin-top: 16px;
+	    font-size: 20px;
+	    cursor: pointer;
+	}
+
+	 #login .panel main {
+	    padding: 16px;
+	    height: 115px;
+	    
+	}
+	#regist .panel main {
+	    padding: 16px;
+	    height: 149px;
+	    
+	}
+
+	 .panel main .input{
+		margin: 8px auto;
+	}
+
+	#regist{
+		display: none;
+	}
+	#login{
+		display: none;
+	}
+	
+	main input{
+		height: 35px;
+		width: 250px;
+		border-top:none; 
+		border-left:none; 
+		border-right:none; 
+	}
+	main input:focus{
+		outline:  none;
+	}
+	.inputbox{
+		margin:8px auto;
+	}
+	footer a{
+		color: #DEDEDE;
+		display: inline-block;
+		margin: 8px 8px;
 	}
 </style>

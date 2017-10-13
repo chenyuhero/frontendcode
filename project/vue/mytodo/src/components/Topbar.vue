@@ -104,10 +104,22 @@
 </template>
 
 <script>
-	import AV from 'leancloud-storage'	
+  import AV from 'leancloud-storage'	
   export default {
   	created:function(){
   		this.currentUser = this.getCurrentUser();
+  		if(this.currentUser){
+       	var query = new AV.Query('AllTodos');
+       	query.find()
+         .then( (todos)=> {
+           let avAllTodos = todos[0]
+           let id = avAllTodos.id
+           this.todoList = JSON.parse(avAllTodos.attributes.content1)
+           this.todoList.id = id
+         }, function(error){
+           console.error(error) 
+         })
+     }
   	},
     data() {
       return {
