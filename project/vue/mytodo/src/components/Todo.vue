@@ -65,10 +65,10 @@
 	 	},
 	 	created:function(){
 	 		 window.onbeforeunload = ()=>{
-		      let dataString1 = JSON.stringify(this.todoList) 
-		      window.localStorage.setItem('myTodos', dataString1) 
-		      let dataString2 = JSON.stringify(this.doneList) 
-		      window.localStorage.setItem('mydones', dataString2) 
+		     let dataString1 = JSON.stringify(this.todoList) 
+		     window.localStorage.setItem('myTodos', dataString1) 
+		     let dataString2 = JSON.stringify(this.doneList) 
+		     window.localStorage.setItem('mydones', dataString2) 
 		    }
 		    let oldDataString1 = window.localStorage.getItem('myTodos')
 		    let oldData1 = JSON.parse(oldDataString1)
@@ -79,15 +79,7 @@
 		     
 	 	},
 	  methods: {
-	  		signUp: function () {
-      			let user = new AV.User();
-      			user.setUsername(this.formData.username);
-      			user.setPassword(this.formData.password);
-      			user.signUp().then(function (loginedUser) {
-        		console.log(loginedUser);
-      			}, function (error) {
-      			});
-    		},
+	  		
 	  		addTodo: function(i){
 	  		console.log(i)
 	  		 console.log(this.todoList[i])		

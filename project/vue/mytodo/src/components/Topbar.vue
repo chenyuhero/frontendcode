@@ -7,9 +7,14 @@
 				<use xlink:href="#icon-dui"></use>
 				</svg>
 			</span>
-			<div class="actions">
-				<el-button @click="login" v-model="actionType" value="signUp">登录</el-button>
+			<div class="actions" v-if="!currentUser">
+				<el-button @click="showlogin" v-model="actionType" value="signUp">登录</el-button>
 				<el-button @click="regist" type="primary" v-model="actionType" value="login">注册</el-button>
+				
+			</div>
+			<div class="actions" v-if="currentUser">
+				<el-button  v-model="actionType" @click="logout" value="logoff">注销</el-button>
+				
 				
 			</div>
 		</div>
@@ -29,7 +34,7 @@
 		                <main>
 		                	<div class="inputbox">
 		                		
-		                		<input type="text" placeholder="邮箱" v-model="formData.mail" >
+		                		<input type="text" placeholder="邮箱" v-model="formData.username" >
 		                	</div>
 		                    <div class="inputbox">
 		                    	
@@ -42,7 +47,7 @@
 		                 </main>
 		                <footer>
 		                	<div>
-		                		<input class="inputbutton" type="submit" value="提交">
+		                		<input class="inputbutton" type="submit" @click="close" value="提交">
 
 		                	</div>
 							                	
@@ -57,7 +62,7 @@
 		<div v-bind:class="{hide : hidel}">
 			<div id="login"  >
 			  	<div class="panel" >
-			  		<form>
+			  		<form  @submit.prevent="login">
 			  			<header>
 	                    <span class="close" @click="close">×</span>
 	                    <h3>现在Todo
@@ -68,7 +73,7 @@
 	                </header>
 	                <main>
 	                	<div class="inputbox">
-	                		   	<input type="text" v-model="formData.email" placeholder="邮箱" >
+	                		   	<input type="text" v-model="formData.username" placeholder="邮箱" >
 	                	</div>
 	                    <div class="inputbox">
 	                    	
@@ -78,7 +83,7 @@
 	                </main>
 	                <footer>
 	                	<div>
-	                		<input class="inputbutton" type="submit"  value="登录">
+	                		<input class="inputbutton" type="submit"  @click="close" value="登录">
 
 	                	</div>
 						   	<a href="">没有账号?</a>
@@ -99,49 +104,72 @@
 </template>
 
 <script>
+	import AV from 'leancloud-storage'	
   export default {
-  	props:['AV'],
+  	created:function(){
+  		this.currentUser = this.getCurrentUser();
+  	},
     data() {
       return {
       	loginr : false ,
       	hidel : false ,
       	actionType:'signUp',
+      	currentUser: null,
       	formData:{
-      		email:'',
+      		username:'',
       		password:''
       	}
       }
     },
     methods: {
-    	signUp: function () {
-  			let user = new AV.User();
-  			user.setUsername(this.formData.username);
-  			user.setPassword(this.formData.password);
-  			user.signUp().then(function (loginedUser) {
-    		console.log(loginedUser);
-  			}, function (error) {
-  			});
-		},
-        login(){
-      	this.hidel = true;
-         },
-      regist(){
-      	this.loginr = true;
-         },
-      close(){
-      	this.loginr = false;
-      	this.hidel = false;
-      	console.log("关闭")
-      },
-       signUp: function () {
-      	let user = new AV.User();
-      	user.setUsername(this.formData.username);
-      	user.setPassword(this.formData.password);
-     	 user.signUp().then(function (loginedUser) {
-       	 console.log(loginedUser);
-      }, function (error) {
+    signUp: function () {
+      let user = new AV.User();
+      user.setUsername(this.formData.username);
+      user.setPassword(this.formData.password);
+      user.signUp().then((loginedUser) => { // 👈，将 function 改成箭头函数，方便使用 this
+        this.currentUser = this.getCurrentUser() // 👈
+        console.log("我运行了")
+      }, (error) => {
+        alert('注册失败') // 👈
       });
-    }
+    },
+    login: function () {
+      AV.User.logIn(this.formData.username, this.formData.password).then((loginedUser) => { // 👈
+        this.currentUser = this.getCurrentUser() // 👈
+      }, function (error) {
+        alert('登录失败') // 👈
+      });
+    },
+    getCurrentUser: function () { // 👈
+     let current = AV.User.current()
+       if (current) {
+         let {id, createdAt, attributes: {username}} = current
+         // 上面这句话看不懂就得看 MDN 文档了
+         // 我的《ES 6 新特性列表》里面有链接：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+         return {id, username, createdAt} // 看文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Object_initializer#ECMAScript_6%E6%96%B0%E6%A0%87%E8%AE%B0
+       } else {
+         return null
+       }
+    },
+    logout: function () {
+       alert(this.currentUser.username + "注销成功")
+       AV.User.logOut()
+       this.currentUser = null
+       window.location.reload()
+
+      },
+  showlogin(){
+  	this.hidel = true;
+     },
+  regist(){
+  	this.loginr = true;
+     },
+  close(){
+  	this.loginr = false;
+  	this.hidel = false;
+  	
+  },
+      
     }
   }
 </script>
