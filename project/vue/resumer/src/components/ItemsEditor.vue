@@ -7,12 +7,13 @@
 			    <el-input v-model="item[key]" ></el-input>
 			  </el-form-item>
 			</el-form>
-			
-			<hr>
+						
+		</div>
+		<div>
+			<button class="primary" v-on:click="addWorkHistory">添加</button>
+			<button  v-on:click="removeWorkHistory(index)">删除</button>
 		</div>
 		
-		<el-button type="primary" v-on:click="addWorkHistory">添加</el-button>
-		<el-button :plain="true" type="info" v-on:click="removeWorkHistory(index)">删除</el-button>
 	</div>
 </template>
 
@@ -45,4 +46,25 @@
 	}
 </script>
 
-
+<style scoped lang="scss">
+	button{
+	padding:5px auto;	
+	width:72px;
+	height:32px;
+	border:none;
+	cursor:pointer;
+	font-size:18px;
+	background:#ddd;
+	color:#222;
+	&:hover{
+		box-shadow:1px 1px 1px hsla(0,0,0,0.50);
+		background:red;
+		color:white;
+	}
+	&.primary{
+	background:#02af5f;
+	color:white;
+	}
+	}
+	
+</style>

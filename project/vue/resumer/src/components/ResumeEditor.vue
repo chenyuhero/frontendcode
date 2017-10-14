@@ -97,7 +97,7 @@
 	overflow:auto;
 	> nav{
 		width: 80px;
-		background:black;
+		background:#02af5f;
 		color:white;
 		>  ol{
 			> li{
@@ -109,7 +109,7 @@
 				margin-bottom:16px;
 				&.active{
 					background:white;
-					color:black;
+					color:#02af5f;
 				}
 		 	}
 		}
@@ -124,7 +124,6 @@
 				top:10px;
 			}
 		}
-
 
 		flex-grow: 1;
 
@@ -141,8 +140,6 @@
 		}
 		
 	}
-
-
 
 }
 svg.icon{

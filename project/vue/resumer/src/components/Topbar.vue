@@ -4,8 +4,8 @@
 		<div class="wrapper">
 			<span class="logo">Resumer</span>
 			<div class="actions">
-				<button class="primary">保存</button>
-				<button @click="preview">预览</button>
+				<button class="primary">登录</button>
+				<button >注册</button>
 			</div>
 		
 		</div>
@@ -48,7 +48,7 @@
 
 	 .logo{
 	font-size:24px;
-	color:#000000;
+	color:#02af5f;
 	}
 	button{
 	width:72px;

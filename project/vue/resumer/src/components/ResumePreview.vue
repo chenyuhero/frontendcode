@@ -99,6 +99,7 @@
 <style>
 
 	.resumePreview{
+	margin: 40px 16px;		
 	background:#ffffff;
 	box-shadow:0 1px 3px 0 rgba(0,0,0,0.25);
 	flex-grow:1;

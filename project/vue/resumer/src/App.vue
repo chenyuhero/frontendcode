@@ -1,11 +1,12 @@
 <template>
     <div id="page" v-bind:class="{show : hide}">
         <header>
-           <Topbar class="topbar" v-on:preview="preview"/>
+           <Topbar class="topbar" />
         </header>
         <main>
             <ResumeEditor id="editor" v-bind:resume="resume"/>
             <ResumePreview id="preview" v-bind:resume="resume"/>
+            <Action class="actionbar" v-on:preview="preview"/>
             <button class="exitpreview" @click="exitpreview">退出预览</button>
         </main>
 
@@ -17,6 +18,7 @@
   import './assets/reset.css'
   import 'normalize.css/normalize.css'
 
+  import Action from './components/Action'
   import Topbar from './components/Topbar'
   import ResumeEditor from './components/ResumeEditor'
   import ResumePreview from './components/ResumePreview'
@@ -33,7 +35,7 @@ export default {
   },
   name: 'app',
   store,
-  components: {Topbar,ResumeEditor,ResumePreview},
+  components: {Topbar,ResumeEditor,ResumePreview,Action},
   data(){
     return {
 
@@ -83,34 +85,31 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #EAEBEC;
  
-
   >main{
     flex-grow: 1;
   }
 
   >main{
-  min-width:1024px;
-  max-width:1440px;
-  margin-top:16px;
-  margin-bottom:16px;
   display:flex;
   justify-content:space-between;
-  padding:0 16px;
   align-self:center;
   width:100%;
   } 
   
   }
+  .actionbar{
+   width: 250px; 
+   }
+  #preview{
+    max-width:900px;
+  }
   .resumeEditor{
-  width: 35%;
-  background: #444;
+  width: 20%;
+  background: #02af5f;
   }
 
-  #resumePreview{
-   
-  }
+  
   svg.icon{
     height: 1em;
     width: 1em;
@@ -126,7 +125,10 @@ export default {
 }
 .show #preview{
   margin:32px auto;
-  max-width:800px;
+  max-width:900px;
+}
+.show .actionbar{
+  display:none;
 }
 .exitpreview{
   display:none;
