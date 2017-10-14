@@ -95,6 +95,7 @@
 		padding: 8px 8px;
 		list-style: none;
 		height: 50px;
+		border-radius: 8px;
 		float: left;
 		cursor: pointer;
 		background: #02af5f;
