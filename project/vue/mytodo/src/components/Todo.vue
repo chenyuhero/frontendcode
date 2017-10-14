@@ -14,6 +14,7 @@
 				
 			</div>
 			<div class="actions" v-if="currentUser">
+				<el-button type="text">{{currentUser.username}}</el-button>
 				<el-button  v-model="actionType" @click="logout" value="logoff">注销</el-button>
 				
 				
@@ -35,15 +36,14 @@
 		                <main>
 		                	<div class="inputbox">
 		                		
-		                		<input type="text" placeholder="邮箱" v-model="formData.username" >
+		                		<input type="text" placeholder="用户名" v-model="formData.username" >
 		                	</div>
 		                    <div class="inputbox">
 		                    	
 								<input  type="password" placeholder="密码" v-model="formData.password">
 		                    </div>
 		                    <div class="inputbox">
-		                    	
-								<input  type="password" placeholder="确认密码" v-model="formData.password">
+		                    	<input  type="password" placeholder="确认密码" v-model="formData.repassword">
 		                    </div>
 		                 </main>
 		                <footer>
@@ -74,7 +74,7 @@
 	                </header>
 	                <main>
 	                	<div class="inputbox">
-	                		   	<input type="text" v-model="formData.username" placeholder="邮箱" >
+	                		   	<input type="text" v-model="formData.username" placeholder="用户名" >
 	                	</div>
 	                    <div class="inputbox">
 	                    	
@@ -84,6 +84,7 @@
 	                </main>
 	                <footer>
 	                	<div>
+
 	                		<input class="inputbutton" type="submit"  @click="close" value="登录">
 
 	                	</div>
@@ -165,18 +166,20 @@
       			hidel : false ,
       			actionType:'signUp',
       			currentUser: null,
-		      	formData:{
+      			formData:{
 		      		username:'',
-		      		password:''
-		      	}
-			 		}
+		      		password:'',
+		      		repassword:''
+		      	 }
+			 }
+
 	 	},
 	 	created:function(){
   			this.currentUser = this.getCurrentUser();
   			this.fetchTodos()
   		},
 	 	
-	  methods: {
+	  	methods: {
 	  		 fetchTodos: function(){
 	  		 	if(this.currentUser){
 		       	var query = new AV.Query('AllTodos');
@@ -184,7 +187,8 @@
 		         .then( (todos)=> {
 		           let avAllTodos = todos[0]
 		           let id = avAllTodos.id
-		           this.todoList = JSON.parse(avAllTodos.attributes.content1)
+		           this.todoList = JSON.parse(avAllTodos.attributes.do)
+		           this.doneList = JSON.parse(avAllTodos.attributes.done)
 		           this.todoList.id = id
 		         }, function(error){
 		           console.error(error) 
@@ -194,8 +198,10 @@
 	  		updateTodos: function(){
 		       // 想要知道如何更新对象，先看文档 https://leancloud.cn/docs/leanstorage_guide-js.html#更新对象
 		       let dataString1 = JSON.stringify(this.todoList) // JSON 在序列化这个有 id 的数组的时候，会得出怎样的结果？
+		       let dataString2 = JSON.stringify(this.doneList) 
 		       let avTodos = AV.Object.createWithoutData('AllTodos', this.todoList.id)
-		       avTodos.set('content1', dataString1)
+		       avTodos.set('do', dataString1)
+		       avTodos.set('done', dataString2);
 		       avTodos.save().then(()=>{
 		         console.log('更新成功')
 		       })
@@ -208,16 +214,17 @@
       		 var acl = new AV.ACL()
        		 acl.setReadAccess(AV.User.current(),true) 
        		 acl.setWriteAccess(AV.User.current(),true) 
-      		 avTodos.set('content1', dataString1);
-      		 avTodos.set('content2', dataString2);
+      		 avTodos.set('do', dataString1);
+      		 avTodos.set('done', dataString2);
       		 avTodos.setACL(acl)
       		 avTodos.save().then( (todo)=> {
-        		 // 成功保存之后，执行其他逻辑.
-        		this.todoList.id = todo.id 
-        	 	console.log('保存成功');
+        		// 成功保存之后，执行其他逻辑.
+        		console.log(this.todo)
+        		this.todoList.id = todo.id
+        		
         	}, function (error) {
         		// 异常处理
-        		 console.error('保存失败');
+        		 
       		 });
 		    
 		    		     
@@ -230,8 +237,7 @@
 		       }
 		     },
 	  		addTodo: function(i){
-	  		console.log(i)
-	  		 console.log(this.todoList[i])		
+	  		  console.log(this.todoList[i])		
 		      this.todoList[i].push({
 		        title: this.newTodo,
 		        createdAt: new Date(),
@@ -263,28 +269,28 @@
 		      let user = new AV.User();
 		      user.setUsername(this.formData.username);
 		      user.setPassword(this.formData.password);
-		      user.signUp().then((loginedUser) => { // 👈，将 function 改成箭头函数，方便使用 this
-		        this.currentUser = this.getCurrentUser() // 👈
-		        console.log("我运行了")
+		      user.signUp().then((loginedUser) => { 
+		        this.currentUser = this.getCurrentUser() 
+		        alert('注册成功')
 		      }, (error) => {
-		        alert('注册失败') // 👈
+		        alert('注册失败') 
 		      });
+		     
+		      
 		    },
 		    login: function () {
 		      AV.User.logIn(this.formData.username, this.formData.password).then((loginedUser) => { // 👈
 		        this.currentUser = this.getCurrentUser() 
 		        this.fetchTodos()
 		      }, function (error) {
-		        alert('登录失败') // 👈
+		        alert('登录失败') 
 		      });
 		    },
-		    getCurrentUser: function () { // 👈
+		    getCurrentUser: function () { 
 		       let current = AV.User.current()
 		       if (current) {
 		         let {id, createdAt, attributes: {username}} = current
-		         // 上面这句话看不懂就得看 MDN 文档了
-		         // 我的《ES 6 新特性列表》里面有链接：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-		         return {id, username, createdAt} // 看文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Object_initializer#ECMAScript_6%E6%96%B0%E6%A0%87%E8%AE%B0
+		         return {id, username, createdAt} 
 		       } else {
 		         return null
 		       }
@@ -390,7 +396,7 @@
 
 	}
   .done ul li {
-  		margin: 8px auto;
+  		margin: 8px 8px;
 		display: flex;
 		align-content: center;
 		height: 35px;
