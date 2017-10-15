@@ -35,7 +35,7 @@
 						<h2>联系方式</h2>
 						<el-form >
 						  <el-form-item label="QQ">
-						    <el-input v-model="resume.Cantant.qq" ></el-input>
+						    <el-input v-model="resume.Cantant.QQ" ></el-input>
 						  </el-form-item>
 						  <el-form-item label="	邮箱">
 						    <el-input v-model="resume.Cantant.mail" ></el-input>

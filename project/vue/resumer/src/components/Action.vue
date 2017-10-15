@@ -72,7 +72,7 @@
 		background: #D1EEEE;
 	}
 	.color7{
-		background: #B23AEE;
+		background: rgb(157,87,202);
 	}
 	.color8{
 		background: #8B1C62;
@@ -86,7 +86,7 @@
 	.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
 	.clearfix{*+height:1%;}
 	.tabbar{
-		margin: 40px 16px;
+		margin: 40px 0 0 0;
 		background: rgb(250,250,250);
 		border:1px  solid #ddd; 
 	}
@@ -104,6 +104,10 @@
 		display: inline-block;
 		text-align:center;
 	}
+	.themebar{
+		overflow: hidden;
+
+	}
 	.actiontab ul li:hover{
 		opacity: 0.8;
 	}
@@ -112,6 +116,7 @@
 	}
 	.themebar ul li {
 		width: 70px;
+
 		padding: 8px 8px;
 		list-style: none;
 		height: 50px;

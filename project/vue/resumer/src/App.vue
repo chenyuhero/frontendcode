@@ -42,27 +42,27 @@ export default {
       hide : false,
       resume:{
         profile:{
-        name:'',
-        city:'',
-        age:''
+        name:'梁朝伟',
+        city:'香港',
+        age:'55'
       },
       workHistory:[
-        { company:'', content:''}
+        { company:'三合会', content:'小弟'}
 
       ],
       StudyHistory:[
-        {school:'',duration:'',degree:''}
+        {school:'黄日成警官学院',duration:'1',degree:'学士'}
 
       ],
       ProjectHistory:[
-        {projectName:'' ,projectContent:''  }
+        {projectName:'训练' ,projectContent:'坚持训练'  }
       ],
       Award:[
 
-        {awardName:'',awardContent:''}
+        {awardName:'影帝',awardContent:'最佳内鬼'}
       ],
       Cantant:
-        {QQ:'',phone:'',mail:''}
+        {QQ:'12345678',phone:'13888888888',mail:'liangchawei@163.com'}
       
       }
     }
@@ -126,6 +126,7 @@ export default {
 .show #preview{
   margin:32px auto;
   max-width:900px;
+  overflow:inherit;
 }
 .show .actionbar{
   display:none;
