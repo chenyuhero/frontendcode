@@ -11,6 +11,7 @@
 		<section v-if="filter(resume.workHistory).length > 0" class="sectioncontent">
 			<div class="titleleft">
 				<h2>工作经历</h2>
+
 				<svg class="icon icon1" >
 			    	<use xlink:href="#icon-work"></use>
 			    </svg>
@@ -38,7 +39,7 @@
 		<section v-if="filter(resume.workHistory).length > 0" class="sectioncontent"> 
 			<div class="titleleft">
 			<h2>学历信息</h2>
-			<svg class="icon" >
+			<svg class="icon icon1" >
 			   	<use xlink:href="#icon-work"></use>
 			</svg>
 			</div>
@@ -65,7 +66,7 @@
 		<section v-if="filter(resume.ProjectHistory).length > 0" class="sectioncontent">
 			<div class="titleleft">
 			<h2>项目经历</h2>
-			<svg class="icon" >
+			<svg class="icon icon1" >
 			   	<use xlink:href="#icon-work"></use>
 			</svg>
 			</div>
@@ -87,7 +88,7 @@
 		<section v-if="filter(resume.Award).length > 0" class="sectioncontent">
 			<div class="titleleft">
 			<h2>获奖情况</h2>
-			<svg class="icon" >
+			<svg class="icon icon1" >
 			    <use xlink:href="#icon-work"></use>
 			</svg>
 			</div>
@@ -158,7 +159,8 @@
 		padding: 0 8px 16px 0;
 	}
 	.line{
-		margin-bottom: 20px ;
+		margin: 35px 0px 60px 0px;
+		padding: auto 0;
 		border: 1.5px solid rgb(157,87,202);
 	}
 	.sectioncontent{
@@ -202,5 +204,6 @@
 		top:-9px;
 		right: -9px;
 		z-index: 10;
+		background: rgb(157,87,202);
 	}
 </style>
