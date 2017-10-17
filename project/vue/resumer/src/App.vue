@@ -1,23 +1,30 @@
 <template>
-    <div id="page" v-bind:class="{show : hide}">
+
+       
+      <div id="page" v-bind:class="{show : hide}">
         <header>
-           <Topbar class="topbar" />
+           <Topbar class="topbar"/>
+           <Login/>
         </header>
-        <main>
+        <main class="beforelogin">
             <ResumeEditor id="editor" v-bind:resume="resume"/>
             <ResumePreview id="preview" v-bind:resume="resume"/>
             <Action class="actionbar" v-on:preview="preview"/>
             <button class="exitpreview" @click="exitpreview">退出预览</button>
-        </main>
+       </main>
 
     </div>
+
+
+
+    
 </template>
 
 <script>
 
   import './assets/reset.css'
   import 'normalize.css/normalize.css'
-
+  import Login from './components/Login'
   import Action from './components/Action'
   import Topbar from './components/Topbar'
   import ResumeEditor from './components/ResumeEditor'
@@ -35,7 +42,7 @@ export default {
   },
   name: 'app',
   store,
-  components: {Topbar,ResumeEditor,ResumePreview,Action},
+  components: {Topbar,ResumeEditor,ResumePreview,Action,Login},
   data(){
     return {
 
@@ -89,6 +96,9 @@ export default {
   >main{
     flex-grow: 1;
   }
+  >.afterlogin{
+    display:none;
+  }
 
   >main{
   display:flex;
@@ -96,7 +106,9 @@ export default {
   align-self:center;
   width:100%;
   } 
-  
+  .beforelogin{
+    display:none;
+  }
   }
   .actionbar{
    width: 250px; 

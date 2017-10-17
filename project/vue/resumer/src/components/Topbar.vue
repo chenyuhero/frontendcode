@@ -1,34 +1,22 @@
 <template>
-	<div id="topbar">
+	 	<div id="topbar">
 
-		<div class="wrapper">
-			<span class="logo">Resumer</span>
-			<div class="actions">
-				<button class="primary">登录</button>
-				<button >注册</button>
+			<div class="wrapper">
+				<span class="logo">Resumer</span>
+				<div class="actions">
+				</div>
+				
 			</div>
-		
 		</div>
-	</div>
-
-
+			
+			
+	
 </template>
 
-<script>
-	export default{
-		methods:{
-			preview(){
-				
-				this.$emit('preview')
-			}
-		}
-	}		
-
-
-</script>
 <style scoped lang="scss">
 
 	#topbar{
+	display:fixed;	
 	background: #ffffff;
 	box-shadow:0 1px 3px 0 rgba(0,0,0,0.25);
 	height:64px;
@@ -67,6 +55,9 @@
 	}
 	}
 	
+	
+	
+	
 	}
-
+	
 </style>

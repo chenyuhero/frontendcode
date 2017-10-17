@@ -140,7 +140,7 @@
 </script>
 
 
-<style>
+<style scoped>
 	ul li{
 		list-style: none;
 	}
@@ -203,7 +203,7 @@
 		position: absolute;
 		top:-9px;
 		right: -9px;
-		z-index: 10;
+		
 		background: rgb(157,87,202);
 	}
 </style>
