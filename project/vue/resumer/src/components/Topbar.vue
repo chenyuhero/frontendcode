@@ -4,6 +4,7 @@
 			<div class="wrapper">
 				<span class="logo">Resumer</span>
 				<div class="actions">
+					<el-button type="text" @click="logout" >{{user.formData.username}} </el-button>
 				</div>
 				
 			</div>
@@ -12,7 +13,17 @@
 			
 	
 </template>
+<script type="text/javascript">
+	export default {
+		props:['user'],
+		methods:{
+			logout(){
+				this.$emit('logout')
+			}
+		}
+	}
 
+</script>
 <style scoped lang="scss">
 
 	#topbar{
@@ -38,26 +49,6 @@
 	font-size:24px;
 	color:#02af5f;
 	}
-	button{
-	width:72px;
-	height:32px;
-	border:none;
-	cursor:pointer;
-	font-size:18px;
-	background:#ddd;
-	color:#222;
-	&:hover{
-		box-shadow:1px 1px 1px hsla(0,0,0,0.50);
-	}
-	&.primary{
-	background:#02af5f;
-	color:white;
-	}
-	}
-	
-	
-	
-	
 	}
 	
 </style>

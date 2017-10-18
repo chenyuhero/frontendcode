@@ -1,6 +1,6 @@
 <template>
 	<div class="loginbox">
-		<div class="panel">
+		<div class="panel" v-if="! user.currentUser">
 	  		
 	  			<header>
 	  			<div class="switch">
@@ -8,13 +8,13 @@
 	  			</div>
 	  			         
                 </header>
-                <form v-bind:class="{formshow:cur === 1}">
+                <form @submit.prevent="login" v-bind:class="{formshow:cur === 1}">
 	                <main>
 	                	<div class="inputbox">
-	                		<input type="text" placeholder="用户名"  >
+	                		<input type="text" placeholder="用户名" v-model="user.formData.username" >
 	                	</div>
 	                    <div class="inputbox">
-	                    	<input  type="password" placeholder="密码" >
+	                    	<input  type="password" placeholder="密码" v-model="user.formData.password">
 	                    </div>
 	                    </main>
 	                <footer>
@@ -24,13 +24,13 @@
 						                	
 					</footer>
 	  			</form>
-	  			<form v-bind:class="{formshow:cur === 0}">
+	  			<form @submit.prevent="signUp"  v-bind:class="{formshow:cur === 0}" >
 	                <main>
 	                	<div class="inputbox">
-	                		<input type="text" placeholder="用户名"  >
+	                		<input type="text" placeholder="用户名" v-model="user.formData.username" >
 	                	</div>
 	                    <div class="inputbox">
-	                    	<input  type="password" placeholder="密码" >
+	                    	<input  type="password" placeholder="密码" v-model="user.formData.password" >
 	                    </div>
 	                    </main>
 	                <footer>
@@ -47,15 +47,29 @@
 </template>
 <script type="text/javascript">
 	export default {
+		props:['user'],
+		methods:{
+			login(){
+				this.$emit('login')
+			},
+			signUp(){
+				this.$emit('signUp')
+			},
+
+		},
 		data(){
 			return{
-				cur:0
-		}
-	  }
+				cur:0,
+				
+			}
+		}	
+
+	  	
 	}
+
 </script>
 
-<style type="text/css">
+<style scoped>
 	.formshow{
 		display: none;
 	}

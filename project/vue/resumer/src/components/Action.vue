@@ -6,11 +6,11 @@
 				<li class="hideblock">占位</li>	
 				<li @click="preview" >预览</li>
 				<li class="hideblock">占位</li>
-				<li >二维码</li>
+				<li >打印</li>
 				<li class="hideblock">占位</li>	
 				<li >下载</li>
 				<li class="hideblock">占位</li>
-				<li >保存</li>
+				<li @click="save">保存</li>
 				<li class="hideblock">占位</li>	
 				</ul>
 		</div>
@@ -37,8 +37,10 @@
 	export default{
 		methods:{
 			preview(){
-				
 				this.$emit('preview')
+			},
+			save(){
+				this.$emit('save')
 			}
 		}
 	}		
@@ -86,7 +88,7 @@
 	.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
 	.clearfix{*+height:1%;}
 	.tabbar{
-		margin: 40px 0 0 0;
+		margin: 40px 34px 0 0;
 		background: rgb(250,250,250);
 		border:1px  solid #ddd; 
 	}

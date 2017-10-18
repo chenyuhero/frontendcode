@@ -9,13 +9,14 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 Vue.use(ElementUI)
 
-var APP_ID = 'hTmHIWs46U02Jg0i3XaaH6Ad-gzGzoHsz';
-var APP_KEY = 'Dhu9v1gFUx8AzW6BduGAY1GH';
+var APP_ID = 's7uCPP4wVpe2lLv0lH1IQhV0-gzGzoHsz';
+var APP_KEY = 'iIwwkdMxfJHe8qdmUuNlaFWE';
 
 AV.init({
   appId: APP_ID,
   appKey: APP_KEY
 });
+
 
 
 Vue.config.productionTip = false

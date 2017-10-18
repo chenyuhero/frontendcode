@@ -3,13 +3,13 @@
        
       <div id="page" v-bind:class="{show : hide}">
         <header>
-           <Topbar class="topbar"/>
-           <Login/>
+           <Topbar class="topbar" v-bind:user="user" v-on:logout='logout'/>
+           <Login v-bind:user="user" v-on:login="login" v-on:signUp="signUp"/>
         </header>
-        <main class="beforelogin">
+        <main v-if="user.currentUser">
             <ResumeEditor id="editor" v-bind:resume="resume"/>
             <ResumePreview id="preview" v-bind:resume="resume"/>
-            <Action class="actionbar" v-on:preview="preview"/>
+            <Action class="actionbar" v-on:preview="preview" v-on:save="save"/>
             <button class="exitpreview" @click="exitpreview">退出预览</button>
        </main>
 
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-
+  import AV from 'leancloud-storage'
   import './assets/reset.css'
   import 'normalize.css/normalize.css'
   import Login from './components/Login'
@@ -39,14 +39,22 @@ export default {
 
   created(){
        document.body.insertAdjacentHTML('afterbegin',icons)
+
   },
   name: 'app',
   store,
   components: {Topbar,ResumeEditor,ResumePreview,Action,Login},
   data(){
     return {
-
+    
       hide : false,
+      user:{
+        currentUser:'',
+        formData:{
+          username:'',
+          password:''
+        }
+      },
       resume:{
         profile:{
         name:'梁朝伟',
@@ -75,12 +83,60 @@ export default {
     }
   },
   methods:{
+    save: function(){
+       let dataString = JSON.stringify(this.resume)
+       var AVTodos = AV.Object.extend('AllTodos');
+       var avTodos = new AVTodos();
+       var acl = new AV.ACL()
+       acl.setReadAccess(AV.User.current(),true) // 只有这个 user 能读
+       acl.setWriteAccess(AV.User.current(),true) // 只有这个 user 能写
+       avTodos.set('content', dataString);
+       avTodos.setACL(acl)
+       avTodos.save().then(function (todo) {
+         alert('保存成功');
+       }, function (error) {
+         alert('保存失败');
+       });
+     },
     exitpreview(){
       this.hide = false
     },
     preview(){
       this.hide=true
-     }
+     },
+    signUp: function () {
+          let user = new AV.User();
+          user.setUsername(this.user.formData.username);
+          user.setPassword(this.user.formData.password);
+          user.signUp().then( (loginedUser)=> {
+            this.user.currentUser = this.getCurrentUser();
+            alert("注册成功")
+          }, function (error) {
+            alert("注册失败")
+          });
+        },
+    login: function () {
+          AV.User.logIn(this.user.formData.username, this.user.formData.password).then( (loginedUser) =>{
+            this.user.currentUser = this.getCurrentUser();
+          }, function (error) {
+              alert("登陆失败")
+          });
+        },
+    getCurrentUser: function () { 
+           let current = AV.User.current()
+       if (current) {
+         let {id, createdAt, attributes: {username}} = current
+         return {id, username, createdAt} 
+       } else {
+         return null
+       }
+        },
+    logout: function () {
+       AV.User.logOut()
+       this.user.currentUser = null
+       window.location.reload()
+      }     
+     
   }
 
  
@@ -96,11 +152,7 @@ export default {
   >main{
     flex-grow: 1;
   }
-  >.afterlogin{
-    display:none;
-  }
-
-  >main{
+    >main{
   display:flex;
   justify-content:space-between;
   align-self:center;
