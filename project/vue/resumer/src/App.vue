@@ -37,10 +37,9 @@
 
 export default {
   created(){
-       document.body.insertAdjacentHTML('afterbegin',icons)
        this.currentUser = this.getCurrentUser();
-       console.log(this.currentUser)
        this.fetchTodos()
+       document.body.insertAdjacentHTML('afterbegin',icons)
      },
   name: 'app',
   store,
