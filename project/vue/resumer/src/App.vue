@@ -3,13 +3,13 @@
        
       <div id="page" v-bind:class="{show : hide}">
         <header>
-           <Topbar class="topbar" v-bind:user="user" v-on:logout='logout'/>
-           <Login v-bind:user="user" v-on:login="login" v-on:signUp="signUp"/>
+           <Topbar class="topbar" v-bind:currentUser="currentUser" v-on:logout='logout'/>
+           <Login v-bind:user="user"  v-on:login="login" v-on:signUp="signUp" v-bind:log="log"/>
         </header>
-        <main v-if="user.currentUser">
-            <ResumeEditor id="editor" v-bind:resume="resume"/>
+        <main v-if='log'>
+            <ResumeEditor id="editor" v-bind:resume="resume" />
             <ResumePreview id="preview" v-bind:resume="resume"/>
-            <Action class="actionbar" v-on:preview="preview" v-on:save="save"/>
+            <Action class="actionbar" v-on:preview="preview" v-on:saveOrUpdateTodos="saveOrUpdateTodos"/>
             <button class="exitpreview" @click="exitpreview">退出预览</button>
        </main>
 
@@ -36,64 +36,95 @@
 
 
 export default {
-
   created(){
        document.body.insertAdjacentHTML('afterbegin',icons)
-
-  },
+       this.currentUser = this.getCurrentUser();
+       console.log(this.currentUser)
+       this.fetchTodos()
+     },
   name: 'app',
   store,
   components: {Topbar,ResumeEditor,ResumePreview,Action,Login},
   data(){
     return {
-    
       hide : false,
+      log : false,
+      currentUser: null,
       user:{
-        currentUser:'',
-        formData:{
-          username:'',
-          password:''
+          formData:{
+            username:'',
+            password:''
         }
       },
       resume:{
         profile:{
-        name:'梁朝伟',
-        city:'香港',
-        age:'55'
+        name:'',
+        city:'',
+        age:''
       },
       workHistory:[
-        { company:'三合会', content:'小弟'}
+        { company:'', content:''}
 
       ],
       StudyHistory:[
-        {school:'黄日成警官学院',duration:'1',degree:'学士'}
+        {school:'',duration:'',degree:''}
 
       ],
       ProjectHistory:[
-        {projectName:'训练' ,projectContent:'坚持训练'  }
+        {projectName:'' ,projectContent:''  }
       ],
       Award:[
 
-        {awardName:'影帝',awardContent:'最佳内鬼'}
+        {awardName:'',awardContent:''}
       ],
       Cantant:
-        {QQ:'12345678',phone:'13888888888',mail:'liangchawei@163.com'}
+        {QQ:'',phone:'',mail:''}
       
       }
     }
   },
   methods:{
+    fetchTodos: function(){
+       if(this.currentUser){
+         var query = new AV.Query('AllTodos');
+         query.find()
+            .then((todos) => {
+             let avAllTodos = todos[0] 
+             let id = avAllTodos.id
+             this.resume = JSON.parse(avAllTodos.attributes.content) 
+             this.resume.id = id 
+           }, function(error){
+             console.error(error) 
+           })
+       }
+     },
+    saveOrUpdateTodos: function(){
+       if(this.resume.id){
+         this.update()
+       }else{
+         this.save()
+       }
+     },
+    update: function(){
+       let dataString = JSON.stringify(this.resume) 
+       let avTodos = AV.Object.createWithoutData('AllTodos', this.resume.id)
+       avTodos.set('content', dataString)
+       avTodos.save().then(()=>{
+         console.log('更新成功')
+       })
+     },
     save: function(){
        let dataString = JSON.stringify(this.resume)
        var AVTodos = AV.Object.extend('AllTodos');
        var avTodos = new AVTodos();
        var acl = new AV.ACL()
-       acl.setReadAccess(AV.User.current(),true) // 只有这个 user 能读
-       acl.setWriteAccess(AV.User.current(),true) // 只有这个 user 能写
+       acl.setReadAccess(AV.User.current(),true) 
+       acl.setWriteAccess(AV.User.current(),true) 
        avTodos.set('content', dataString);
        avTodos.setACL(acl)
-       avTodos.save().then(function (todo) {
-         alert('保存成功');
+       avTodos.save().then( (resume)=> {
+         this.resume.id = resume.id
+         console.log(todo.id)
        }, function (error) {
          alert('保存失败');
        });
@@ -109,7 +140,7 @@ export default {
           user.setUsername(this.user.formData.username);
           user.setPassword(this.user.formData.password);
           user.signUp().then( (loginedUser)=> {
-            this.user.currentUser = this.getCurrentUser();
+            this.currentUser = this.getCurrentUser();
             alert("注册成功")
           }, function (error) {
             alert("注册失败")
@@ -117,23 +148,25 @@ export default {
         },
     login: function () {
           AV.User.logIn(this.user.formData.username, this.user.formData.password).then( (loginedUser) =>{
-            this.user.currentUser = this.getCurrentUser();
+            this.currentUser = this.getCurrentUser();
+            this.log = true;
           }, function (error) {
               alert("登陆失败")
           });
         },
-    getCurrentUser: function () { 
-           let current = AV.User.current()
-       if (current) {
-         let {id, createdAt, attributes: {username}} = current
-         return {id, username, createdAt} 
-       } else {
-         return null
-       }
-        },
+   getCurrentUser: function () { 
+          let current = AV.User.current()
+          if (current) {
+             this.log = true;
+             let {id, createdAt, attributes: {username}} = current
+             return {id, username, createdAt} 
+          } else {
+             return null
+          }
+      },
     logout: function () {
        AV.User.logOut()
-       this.user.currentUser = null
+       this.currentUser = null
        window.location.reload()
       }     
      

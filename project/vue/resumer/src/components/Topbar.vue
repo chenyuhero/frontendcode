@@ -4,7 +4,7 @@
 			<div class="wrapper">
 				<span class="logo">Resumer</span>
 				<div class="actions">
-					<el-button type="text" @click="logout" >{{user.formData.username}} </el-button>
+					<el-button type="text" @click="logout" >{{currentUser.username}} </el-button>
 				</div>
 				
 			</div>
@@ -15,7 +15,7 @@
 </template>
 <script type="text/javascript">
 	export default {
-		props:['user'],
+		props:['currentUser'],
 		methods:{
 			logout(){
 				this.$emit('logout')

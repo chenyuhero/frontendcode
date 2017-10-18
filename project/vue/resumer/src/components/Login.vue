@@ -1,10 +1,11 @@
 <template>
 	<div class="loginbox">
-		<div class="panel" v-if="! user.currentUser">
+		<div class="panel" v-if= '! log'>
 	  		
 	  			<header>
 	  			<div class="switch">
-	  				<div id="choosebotton" v-bind:class="{active:cur===0}" v-on:click="cur=0">登录</div><div id="choosebotton" v-bind:class="{active:cur===1}" v-on:click="cur=1" >注册</div>
+	  				<div id="choosebotton" v-bind:class="{active:cur===0}" v-on:click="cur=0">登录</div><div id="choosebotton" v-bind:class="{active:cur===1}" v-on:click="cur=1" >注册
+	  				</div>
 	  			</div>
 	  			         
                 </header>
@@ -47,7 +48,7 @@
 </template>
 <script type="text/javascript">
 	export default {
-		props:['user'],
+		props:['user','log'],
 		methods:{
 			login(){
 				this.$emit('login')

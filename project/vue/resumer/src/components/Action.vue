@@ -10,7 +10,7 @@
 				<li class="hideblock">占位</li>	
 				<li >下载</li>
 				<li class="hideblock">占位</li>
-				<li @click="save">保存</li>
+				<li @click='saveOrUpdateTodos'>保存</li>
 				<li class="hideblock">占位</li>	
 				</ul>
 		</div>
@@ -39,8 +39,8 @@
 			preview(){
 				this.$emit('preview')
 			},
-			save(){
-				this.$emit('save')
+			saveOrUpdateTodos(){
+				this.$emit('saveOrUpdateTodos')
 			}
 		}
 	}		
