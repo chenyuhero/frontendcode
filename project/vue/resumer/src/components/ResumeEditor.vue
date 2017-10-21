@@ -105,6 +105,8 @@
 				display:flex;
 				justify-content:center;
 				align-items:center;
+				margin-top:16px;
+				margin-bottom:16px;
 				&.active{
 					background:white;
 					color:#02af5f;

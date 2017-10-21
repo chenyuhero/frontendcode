@@ -17,31 +17,27 @@
 		<div class="themebar tabbar full clearfix ">
 			<ul>
 				<li id="bartitle">主题</li>
-				<li class="color1"></li>
-				<li class="color2"></li>
-				<li class="color3"></li>
-				<li class="color4"></li>
-				<li class="color5"></li>
-				<li class="color6"></li>
-				<li class="color7"></li>
-				<li class="color8"></li>
-				<li class="color9"></li>
-				
 
-			</ul>
+				<li v-for="i in [0,1,2,3,4,5,6,7,8]"  v-bind:class="{ color1 : 0 == i, color2 : 1 == i,color3 : 2 == i,color4 : i == 3,color5 : i == 4,color6 : i == 5,color7 : i == 6,color8 : i == 7,color9 : i == 8}" v-on:click="change(i)" ></li>
+				</ul>
 		</div>
 		
 	</div>	
 </template>
 <script>
 	export default{
+		props:['resume'],
 		methods:{
 			preview(){
 				this.$emit('preview')
 			},
 			saveOrUpdateTodos(){
 				this.$emit('saveOrUpdateTodos')
+			},
+			change(i){
+				this.resume.currentColor = i
 			}
+			
 		}
 	}		
 

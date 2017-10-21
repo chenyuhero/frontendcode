@@ -8,8 +8,8 @@
         </header>
         <main v-if='log'>
             <ResumeEditor id="editor" v-bind:resume="resume" />
-            <ResumePreview id="preview" v-bind:resume="resume"/>
-            <Action class="actionbar" v-on:preview="preview" v-on:saveOrUpdateTodos="saveOrUpdateTodos"/>
+            <ResumePreview id="preview" v-bind:resume="resume" />
+            <Action class="actionbar" v-on:preview="preview" v-on:saveOrUpdateTodos="saveOrUpdateTodos"  v-bind:resume="resume"/>
             <button class="exitpreview" @click="exitpreview">退出预览</button>
        </main>
 
@@ -48,7 +48,6 @@ export default {
     return {
       hide : false,
       log : false,
-      currentUser: null,
       user:{
           formData:{
             username:'',
@@ -56,6 +55,7 @@ export default {
         }
       },
       resume:{
+        currentColor:6,
         profile:{
         name:'',
         city:'',
@@ -149,6 +149,7 @@ export default {
           AV.User.logIn(this.user.formData.username, this.user.formData.password).then( (loginedUser) =>{
             this.currentUser = this.getCurrentUser();
             this.log = true;
+            window.location.reload()
           }, function (error) {
               alert("登陆失败")
           });
@@ -167,7 +168,8 @@ export default {
        AV.User.logOut()
        this.currentUser = null
        window.location.reload()
-      }     
+      },
+
      
   }
 

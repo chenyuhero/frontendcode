@@ -83,6 +83,31 @@
 						</div>	
 					
 					</div>
+					<div class="workitem">
+						<div class="name">
+							<h3>Todolist</h3>
+						</div>
+						
+						<img class="img" src="../assets/todo.png"> </img>
+						
+						<div id="discribe">
+							<h3>项目介绍:</h3>
+							<p>
+							使用原生 JS，借助 Canvas API 和动态 REM 方案（flexible.js）以及svg iconfont制作的手机画板。 
+							包含橡皮擦、一键擦除、保存图片的功能，期间主要难点在于如何确定上一个触点的位置以及消除画笔锯齿， 所有功能基本上由canvas原生API实现。
+							</p>
+							
+
+							<h3>涉及技术:</h3>	
+							
+							<p>A+b+c</p>
+						</div>
+						<div class="link">
+							<a href="">在线预览</a>
+							<a href="">Git</a>
+						</div>	
+					
+					</div>
 
 
 
