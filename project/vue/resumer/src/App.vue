@@ -57,16 +57,16 @@ export default {
       resume:{
         currentColor:6,
         profile:{
-        name:'',
-        city:'',
-        age:''
+        name:'李雷',
+        city:'北京',
+        age:'10'
       },
       workHistory:[
-        { company:'', content:''}
+        { company:'新世纪英语', content:'说英语'}
 
       ],
       StudyHistory:[
-        {school:'',duration:'',degree:''}
+        {school:'北京市二小',duration:'2000-2017',degree:'小学'}
 
       ],
       ProjectHistory:[
@@ -74,10 +74,10 @@ export default {
       ],
       Award:[
 
-        {awardName:'',awardContent:''}
+        {awardName:'新世纪英语',awardContent:'日常对话'}
       ],
       Cantant:
-        {QQ:'',phone:'',mail:''}
+        {QQ:'123456',phone:'13888888888',mail:'123456@139.com'}
       
       }
     }
