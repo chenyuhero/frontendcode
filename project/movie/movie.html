@@ -102,9 +102,8 @@ footer .active{
 </head>
 <body>
   <main>
-    
-      <section>
-        <div id='container'>
+     <section id="top250">
+        <div class="container">
         </div>
      </section>
     <section>2</section>
@@ -123,39 +122,100 @@ footer .active{
 
 var top250 = {
           init:function(){
-            
+            this.$element = $('#top250')
+            this.index = 0;
+            this.isLoading = false;
+            this.idFinish = false;
+            this.bind()
+            this.start()
           },
           bind:function(){
-
+            console.log("运行了")
+            var _this =this
+            this.$element.scroll(function(){
+          if(!_this.isFinish && Helper.isToEnd(_this.$container, _this.$content)){
+            _this.start()
+          }
+        })  
           },
-          getData:function(){
-             var index = 0;
-             var isLoading = false;
-             if(isLoading) return
-             isLoading = true;
+          start:function(){
+            var _this =this
+            this.getData(function(data){
+              _this.getData(data)
+            })
+          },
+          getData:function(callback){
+             var _this =this
+             if(_this.isLoading) return
+             _this.isLoading = true;
              $('.icon-loading').css('display',"block") 
             $.ajax({
               url:'http://api.douban.com/v2/movie/top250',
               type:'GET',
               data:{
-                start:index,
+                start:_this.index || 0,
                 count:20
               },
               dataType:'jsonp'
             }).done(function(ret){
               console.log(ret)
-              renderData(ret)
-              $('.icon-loading').css('display',"none") 
-              index+=20;
-              
+              _this.renderData(ret)
+              _this.index+=20;
+              if(_this.index >= ret.total){
+                _this.idFinish = true;
+              }
+              callback && callback(ret)              
             }).fail(function(){
               console.log('error ...')
             }).always(function(){
-              isLoading = false;
+              _this.isLoading = false;
+              $('.icon-loading').css('display',"none")
             })
           },
-          renderData:function(){
-
+          renderData:function(data){
+            var _this = this
+            data.subjects.forEach(function(movie){
+              var tpl =`<div class="item clearfix">
+                          <a href="">
+                            <div class="cover">
+                              <img src="http://img7.doubanio.com/view/movie_poster_cover/ipst/public/p480747492.jpg" alt="">
+                            </div>
+                            <div class="detail">
+                              <h2>霸王别姬</h2>
+                              <div class="extra"><span class="score">9.3</span>/<span class="collect">1000</span>收藏</div>
+                              <div class="extra"><span class="year">1994</span>/<span class="genres">剧情、爱情</span></div>
+                              <div class="extra">导演：<span class="directors">陈凯歌</span></div>
+                              <div class="extra">主演：<span class="actors">张国荣、段宏亦、巩俐</span></div>
+                            </div>
+                          </a>
+                        </div>`
+                      var $node=$(tpl)
+                      $node.find('.cover img').attr('src',movie.images.small)
+                      $node.find('.detail h2').text(movie.title)
+                      $node.find('.extra .score').text(movie.rating.average)
+                      $node.find('.extra .year').text(movie.year)
+                      $node.find('.extra .collect').text(movie.collect_count)
+                      $node.find('.extra .genres').text(movie.genres)
+                      $node.find('.extra .directors').text(function(){
+                        var directorsArr = []
+                        movie.directors.forEach(function(item){
+                          directorsArr.push(item.name)
+                        })
+                        return directorsArr.join('、')
+                      })
+                      $node.find('.extra .actors').text(function(){
+                        var actorsArr = []
+                        movie.casts.forEach(function(item){
+                          actorsArr.push(item.name)
+                        })
+                        return actorsArr.join('、')
+                      })
+                     _this.$element.find('.container').append($node)
+                   })
+          },
+          isToBottom:function(){
+            return this.$element.find('.container') <=
+            this.$element.height() + this.$element.scrollTop() +10
           }
 
         }
@@ -223,42 +283,7 @@ $('main').scroll(function(){
 })
 function renderData(data){
   data.subjects.forEach(function(movie){
-    var tpl =`<div class="item clearfix">
-        <a href="">
-          <div class="cover">
-            <img src="http://img7.doubanio.com/view/movie_poster_cover/ipst/public/p480747492.jpg" alt="">
-          </div>
-          <div class="detail">
-            <h2>霸王别姬</h2>
-            <div class="extra"><span class="score">9.3</span>/<span class="collect">1000</span>收藏</div>
-            <div class="extra"><span class="year">1994</span>/<span class="genres">剧情、爱情</span></div>
-            <div class="extra">导演：<span class="directors">陈凯歌</span></div>
-            <div class="extra">主演：<span class="actors">张国荣、段宏亦、巩俐</span></div>
-          </div>
-        </a>
-      </div>`
-    var $node=$(tpl)
-    $node.find('.cover img').attr('src',movie.images.small)
-    $node.find('.detail h2').text(movie.title)
-    $node.find('.extra .score').text(movie.rating.average)
-    $node.find('.extra .year').text(movie.year)
-    $node.find('.extra .collect').text(movie.collect_count)
-    $node.find('.extra .genres').text(movie.genres)
-    $node.find('.extra .directors').text(function(){
-      var directorsArr = []
-      movie.directors.forEach(function(item){
-        directorsArr.push(item.name)
-      })
-      return directorsArr.join('、')
-    })
-    $node.find('.extra .actors').text(function(){
-      var actorsArr = []
-      movie.casts.forEach(function(item){
-        actorsArr.push(item.name)
-      })
-      return actorsArr.join('、')
-    })
-    $('#container').append($node)
+    
   })
   
 }
