@@ -255,6 +255,7 @@ var top250 = {
               },
               dataType:'jsonp'
             }).done(function(ret){
+              console.log(ret)
               _this.renderData(ret)
               _this.index+=20;
               if(_this.index >= ret.total){
