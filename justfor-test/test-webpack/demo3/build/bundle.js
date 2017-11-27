@@ -71,7 +71,6 @@
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sum__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addImage_js__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__addImage_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__addImage_js__);
 
 /*
 var sum = require('./sum')
@@ -100,24 +99,37 @@ module.exports = function(a,b){
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_addImage_css__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_addImage_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_addImage_css__);
+
+
 
 let smallImage = document.createElement('img');
-smallImage.src = __webpack_require__(3);
+smallImage.src = __webpack_require__(4);
 document.body.appendChild(smallImage);
 
 let bigImage = document.createElement('img');
-bigImage.src = __webpack_require__(4);
+bigImage.src = __webpack_require__(5);
 document.body.appendChild(bigImage);
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"test":"_2sErQH2_ZEPUebYR_ZF635"};
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/small.d94e0a5f39d48535a92e382d63c951f7.jpeg";
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/big.df7afebd963f2f67014ee7e95a4cbcc9.jpeg";
