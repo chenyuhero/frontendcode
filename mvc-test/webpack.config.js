@@ -32,18 +32,17 @@ module.exports = {
             },
             {
                 test :/\.css$/,
-                loader : ExtractTextPlugin.extract({
-                    fallback:'style-loader',
-                    use :[
+                use :[
                     {
-                        loader:'css-loader',
-                        options:{
-                            modules: true
-                        }
+                        loader:"style-loader"
+                    },
+                    {
+                        loader:'css-loader'
+                        
                     }
                 ]
 
-                })
+                
                 
                 
             }
@@ -51,7 +50,5 @@ module.exports = {
         ]
     },
     //插件列表
-    plugins:[
-        new ExtractTextPlugin("css/[name].[hash].css")
-    ]
+    
 }

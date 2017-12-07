@@ -1,1 +1,1 @@
-alert(1)
+import "../style/border.css"
