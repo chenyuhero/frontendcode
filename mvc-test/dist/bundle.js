@@ -10976,14 +10976,56 @@ $module2.on("click", "button", function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Controler_js__ = __webpack_require__(10);
 
-let $module3 = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".module3");
-$module3.on("change", "input", function () {
-    console.log("3");
+
+
+new __WEBPACK_IMPORTED_MODULE_1__Controler_js__["a" /* default */]({
+    element: ".module3",
+    events: {
+        'change input': function (e) {
+            console.log('change3');
+        },
+        'click button': function (e) {
+            console.log('click3');
+        }
+    }
 });
-$module3.on("click", "button", function () {
-    console.log("click3");
-});
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+
+/*
+function Controler(options){  
+    
+}
+
+Controler.prototype.bindEvents = function(){
+    
+}
+*/
+
+class Controler {
+    constructor(options) {
+        this.$element = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(options.element);
+        this.$events = options.events;
+        this.bindEvents();
+    }
+    bindEvents() {
+        for (let key in this.$events) {
+            let parts = key.split(' ');
+            let eventType = parts.shift();
+            let selector = parts.join('');
+            this.$element.on(eventType, selector, this.$events[key]);
+        }
+    }
+}
+/* harmony default export */ __webpack_exports__["a"] = (Controler);
 
 /***/ })
 /******/ ]);
