@@ -1,4 +1,4 @@
-import $ from "jquery"
+
 import Controler from './Controler.js'
 
 new Controler({

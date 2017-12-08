@@ -60,11 +60,46 @@
 /******/ 	__webpack_require__.p = "dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+
+/*
+function Controler(options){  
+    
+}
+
+Controler.prototype.bindEvents = function(){
+    
+}
+*/
+
+class Controler {
+    constructor(options) {
+        this.$element = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(options.element);
+        this.$events = options.events;
+        this.bindEvents();
+    }
+    bindEvents() {
+        for (let key in this.$events) {
+            let parts = key.split(' ');
+            let eventType = parts.shift();
+            let selector = parts.join('');
+            this.$element.on(eventType, selector, this.$events[key]);
+        }
+    }
+}
+/* harmony default export */ __webpack_exports__["a"] = (Controler);
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10324,18 +10359,18 @@ return jQuery;
 
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_border_css__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_border_css__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_border_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_border_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__moudle1__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__moudle2__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__moudle3__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__moudle1__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__moudle2__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__moudle3__ = __webpack_require__(10);
 
 
 
@@ -10344,13 +10379,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(3);
+var content = __webpack_require__(4);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -10358,7 +10393,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(5)(content, options);
+var update = __webpack_require__(6)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -10375,10 +10410,10 @@ if(false) {
 }
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(undefined);
+exports = module.exports = __webpack_require__(5)(undefined);
 // imports
 
 
@@ -10389,7 +10424,7 @@ exports.push([module.i, ".modules div{\n    border: 1px solid red;\n    height: 
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 /*
@@ -10471,7 +10506,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -10527,7 +10562,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(6);
+var	fixUrls = __webpack_require__(7);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -10843,7 +10878,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 
@@ -10938,35 +10973,23 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-
-let $module1 = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".module1");
-$module1.on("change", "input", function () {
-    console.log("chang1");
-});
-$module1.on("click", "button", function () {
-    console.log("click1");
-});
-
-/***/ }),
 /* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Controler_js__ = __webpack_require__(0);
 
-let $module2 = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(".module2");
-$module2.on("change", "input", function () {
-    console.log("change2");
-});
-$module2.on("click", "button", function () {
-    console.log("click2");
+
+new __WEBPACK_IMPORTED_MODULE_0__Controler_js__["a" /* default */]({
+    element: ".module1",
+    events: {
+        'change input': function (e) {
+            console.log('change1');
+        },
+        'click button': function (e) {
+            console.log('click1');
+        }
+    }
 });
 
 /***/ }),
@@ -10974,13 +10997,31 @@ $module2.on("click", "button", function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Controler_js__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Controler_js__ = __webpack_require__(0);
+
+
+new __WEBPACK_IMPORTED_MODULE_0__Controler_js__["a" /* default */]({
+    element: ".module2",
+    events: {
+        'change input': function (e) {
+            console.log('change2');
+        },
+        'click button': function (e) {
+            console.log('click2');
+        }
+    }
+});
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Controler_js__ = __webpack_require__(0);
 
 
 
-new __WEBPACK_IMPORTED_MODULE_1__Controler_js__["a" /* default */]({
+new __WEBPACK_IMPORTED_MODULE_0__Controler_js__["a" /* default */]({
     element: ".module3",
     events: {
         'change input': function (e) {
@@ -10991,41 +11032,6 @@ new __WEBPACK_IMPORTED_MODULE_1__Controler_js__["a" /* default */]({
         }
     }
 });
-
-/***/ }),
-/* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-
-/*
-function Controler(options){  
-    
-}
-
-Controler.prototype.bindEvents = function(){
-    
-}
-*/
-
-class Controler {
-    constructor(options) {
-        this.$element = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(options.element);
-        this.$events = options.events;
-        this.bindEvents();
-    }
-    bindEvents() {
-        for (let key in this.$events) {
-            let parts = key.split(' ');
-            let eventType = parts.shift();
-            let selector = parts.join('');
-            this.$element.on(eventType, selector, this.$events[key]);
-        }
-    }
-}
-/* harmony default export */ __webpack_exports__["a"] = (Controler);
 
 /***/ })
 /******/ ]);

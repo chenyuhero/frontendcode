@@ -11,8 +11,10 @@ Controler.prototype.bindEvents = function(){
 
 class Controler{
     constructor(options){
-        this.$element = $(options.element)
-        this.$events = options.events
+        for(let key in options){
+            this[key] = options[key]
+        }
+        this.$element = $(this.element)
         this.bindEvents()
     }
     bindEvents(){
@@ -20,7 +22,10 @@ class Controler{
             let parts = key.split(' ')
             let eventType = parts.shift()
             let selector = parts.join('')
-            this.$element.on(eventType,selector,this.$events[key])
+            if(typeof this.bindEvents[key] === 'function'){
+                this.$element.on(eventType,selector,this.$events[key])
+            }
+            
         }
     }
 }
