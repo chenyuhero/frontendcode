@@ -9,14 +9,15 @@ new Controler({
         'click button':'addToCart'
     },
     addToCart:function(){
+        console.log(this)
         let value = this.$element.find('input').val()
         this.remoteAddCart(value).then(()=>{
             this.showAnimation()
         })
     },
     remoteAddCart:function(){
-        //$.ajax...
-        //return Promise
+        
+        return Promise.resolve(1)
     },
     showAnimation:function(){
         //this.$elementanimation('....')
