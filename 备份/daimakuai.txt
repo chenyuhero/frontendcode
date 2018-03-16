@@ -1,0 +1,71 @@
+	<div class="inputlump">
+			<label class="inputtitle">营业执照图片1：<%If request("Action")<>"" Then%><font color="red">*</font><%End If%></label>
+			<div class="inputcontent"><%=ZlTemp(8)%>&nbsp;<iframe id="UpPhotoFrame" name="UpPhotoFrame" src="User_UpFile.php?Type=Pic&ChannelID=9990&MaxFileSize=7000&Zlx=1&ext=*.jpg;*.gif;*.png" frameborder="0" scrolling="No" align="center" width="400px" height="40px"></iframe>
+					  <table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+						 <td>  <input style="width:250px"  type="textbox" name="PhotoUrl" id="PhotoUrl" class="textbox"/>
+						</td>
+						<td width="410" height="40">
+						</td>
+						
+						</tr>
+					   </table>
+			</div>
+		</div>
+
+
+
+        If trim(Request("P5"))="" Then
+			response.Write("<script language=javascript>")
+			response.Write("if(!confirm('数据格式错误')){history.back();}")
+			response.Write("</script>")
+			response.Write("<script language=javascript>history.go(-1);</script>")
+	End If
+
+
+
+
+    /* if ($('#P12').val()!=""){
+					if(!adress.test($('#P12').val()) ){
+					alert("请输入正确的地址!");
+					$('#P12').focus(); 
+						return false;
+					}
+			
+			} */
+			/*
+			if ($('#P16').val()!=""){
+					if(!cz.test($('#P16').val()) ){
+					alert("请输入正确的传真!");
+					$('#P16').focus(); 
+						return false;
+					}
+			
+			}
+			
+			if(!adress.test($('#P14').val()) ){
+					alert("请输入正确的公司名称!");
+					$('#P14').focus(); 
+						return false;
+			}
+			if(!adress.test($('#P17').val()) ){
+					alert("请输入正确的公司地址!");
+					$('#P17').focus(); 
+						return false;
+			}
+			if(!dh.test($('#P15').val()) ){
+					alert("请输入正确的公司电话!");
+					$('#P15').focus(); 
+						return false;
+			}
+			if(!li.test($('#P15').val()) ){
+					alert("请输入正确的营业执照!");
+					$('#P15').focus(); 
+						return false;
+			}
+			*/	
+			if(!id.test($('#P7').val()) ){
+					alert("请输入正确的身份证号!");
+					$('#P7').focus(); 
+						return false;
+			}
